@@ -1,6 +1,9 @@
 "use client";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
+import CarHero from "../assets/heroCar.png";
+import GetStarted from "@/components/ctaOne";
 
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
@@ -13,16 +16,16 @@ export default function Hero() {
       }
     }
     document.addEventListener("pointerdown", outNav);
-    return() => {
+    return () => {
       document.removeEventListener("pointerdown", outNav);
     };
   }, []);
 
   return (
-    <>
-      <div className="flex justify-between p-4 h-screen text-header text-2xl font-header">
+    <div className="h-screen bg-brand">
+      <div className="flex justify-between p-4 text-header text-2xl font-header">
         <a href="/">
-          <h1 className="">arqila.</h1>
+          <h1 className="font-medium">arqila.</h1>
         </a>
         <div>
           <button onClick={() => setHideNav((prev) => !prev)}>
@@ -30,6 +33,7 @@ export default function Hero() {
           </button>
         </div>
       </div>
+
       {hideNav && (
         <div className="contains">
           <div className="inset-0 fixed backdrop-blur-xs pointer-events-none z-50"></div>
@@ -59,8 +63,18 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        
       )}
-    </>
+
+      <div className="flex justify-center pt-16 px-8">
+        <div className="flex flex-col">
+          <div className="p-2 mb-4">
+            <h1 className="text-4xl text-header font-bold text-left leading-8">modern renting, <br /> local trust</h1>
+            <p className="text-base leading-4">from daily rides to long-term needs, arqila makes renting simple and reliable</p>
+            <GetStarted />
+          </div>
+          <Image src={CarHero} alt="imageCar" className="object-cover w-full" />
+        </div>
+      </div>
+    </div>
   );
 }
