@@ -14,7 +14,8 @@
     --color-text: #1f2937; /* ———————————————————————————————————— normal text ——— */
     --color-panel: #ffffff; /* ———————————————————————————————————— nav bg ——— */
     --color-secondary: #bfdbfe; /* ———————————————————————————————————— second bg ——— */
-    --color-army: #06b6d4; /* ———————————————————————————————————— army green ——— */
+    --color-highlight: #f97316; /* ———————————————————————————————————— bg-orange-500 ——— */
+    --color-highlight-hover: #c2410c; /* ———————————————————————————————————— bg-orange-600 ——— */
 
     --font-heading: "Poppins", sans-serif; /* ———————————————————————————————————— header ——— */
     --font-body: "Inter", sans-serif; /* ———————————————————————————————————— normal ——— */
@@ -60,8 +61,12 @@
     background-color: var(--color-secondary);
   }
 
-  .bg-army {
-    background-color: var(--color-army);
+  .bg-highlight {
+    background-color: var(--color-highlight);
+  }
+
+  .bg-highlight-hover {
+    background-color: var(--color-highlight-hover);
   }
 
   .text-brand {
@@ -78,6 +83,10 @@
 
   .text-panel {
     color: var(--color-panel);
+  }
+
+  .text-highlight {
+    color: var(--color-highlight);
   }
 
   .font-heading {
