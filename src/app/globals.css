@@ -1,26 +1,119 @@
+/* ———————————————————————————————————— google fonts ——— */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Merriweather&family=Special+Elite&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Black+Han+Sans&family=Rubik:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap");
+
+/* ———————————————————————————————————— tailwind ——— */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+/* ———————————————————————————————————— base layer ——— */
+@layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #ededed;
+    --color-bg: #e0f2fe; /* ———————————————————————————————————— primary bg ——— */
+    --color-accent: #3b82f6; /* ———————————————————————————————————— header ——— */
+    --color-text: #1f2937; /* ———————————————————————————————————— normal text ——— */
+    --color-panel: #ffffff; /* ———————————————————————————————————— nav bg ——— */
+    --color-secondary: #bfdbfe; /* ———————————————————————————————————— second bg ——— */
+    --color-army: #06b6d4; /* ———————————————————————————————————— army green ——— */
+
+    --font-heading: "Poppins", sans-serif; /* ———————————————————————————————————— header ——— */
+    --font-body: "Inter", sans-serif; /* ———————————————————————————————————— normal ——— */
+    --font-alt: "Rubik", sans-serif; /* ———————————————————————————————————— normal alt ——— */
+    --font-tall: "Montserrat", sans-serif; /* ———————————————————————————————————— big titles ——— */
+    --font-tall-alt: "Bebas Neue", cursive; /* ———————————————————————————————————— titles alt ——— */
+  }
+
+  body {
+    @apply bg-[var(--color-bg)] text-[var(--color-text)];
+    font-family: var(--font-body);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+
+  p,
+  span,
+  li {
+    font-family: var(--font-body);
+  }
+
+  button {
+    font-family: var(--font-heading);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ———————————————————————————————————— utilities layer ——— */
+@layer utilities {
+  .bg-brand {
+    background-color: var(--color-bg);
+  }
+
+  .bg-panel {
+    background-color: var(--color-panel);
+  }
+
+  .bg-second {
+    background-color: var(--color-secondary);
+  }
+
+  .bg-army {
+    background-color: var(--color-army);
+  }
+
+  .text-brand {
+    color: var(--color-bg);
+  }
+
+  .text-header {
+    color: var(--color-accent);
+  }
+
+  .text-normal {
+    color: var(--color-text);
+  }
+
+  .text-panel {
+    color: var(--color-panel);
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-normal {
+    font-family: var(--font-body);
+  }
+
+  .font-alt {
+    font-family: var(--font-alt);
+  }
+
+  .font-tall {
+    font-family: var(--font-tall);
+  }
+
+  .font-tall-alt {
+    font-family: var(--font-tall-alt);
+  }
+
+  .shadow-aot {
+    box-shadow: 0 4px 10px rgba(139, 30, 30, 0.4);
+  }
+
+  .border-accent {
+    border-color: var(--color-accent);
+  }
+
+  .border-panel {
+    border-color: var(--color-panel);
+  }
+
+  .stroke-text {
+    -webkit-text-stroke: 1px var(--color-bg);
+    text-stroke: 1px var(--color-bg);
+  }
 }
