@@ -4,11 +4,15 @@ import MessageOwner from "@/components/message";
 
 export default function Cars() {
   return (
-    <div className="p-4 mt-">
-      <div className="flex justify-center mb-8">
-        <h1 className="text-2xl">the cars</h1>
+    <div className="p-4 mt-16">
+      <div className="flex justify-center mb-16">
+        <div className="flex flex-col leading-1">
+          <h1 className="text-4xl font-bold text-center">the cars</h1>
+          <p className="font-normal text-normal text-center">— find the right ride</p>
+        </div>
       </div>
-      <div className="flex flex-col p-8 rounded bg-panel">
+
+      <div className="flex flex-col p-8 shadow-2xl rounded bg-panel">
         <Image src={Starrex} alt="car" />
         <h2 className="text-heading font-heading text-base font-semibold">
           HYUNDAI STARREX
