@@ -37,6 +37,7 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* ———————————————————————————————————— nav section ——— */}
       {hideNav && (
         <div className="contains">
           <div className="inset-0 fixed backdrop-blur-xs pointer-events-none z-50"></div>
@@ -80,7 +81,11 @@ export default function Hero() {
             </p>
             <GetStarted />
           </div>
-          <Image src={CarHero} alt="imageCar" className="object-cover w-[100vw] h-auto" />
+          <Image
+            src={CarHero}
+            alt="imageCar"
+            className="object-cover w-[100vw] h-auto"
+          />
         </div>
       </div>
     </div>
