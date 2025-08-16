@@ -31,7 +31,8 @@ export default function Hero() {
         </div>
       </div>
       {hideNav && (
-        <div className="inset-0 fixed backdrop-blur-xs pointer-events-none z-50">
+        <div className="contains">
+          <div className="inset-0 fixed backdrop-blur-xs pointer-events-none z-50"></div>
           <div
             ref={navRef}
             className="h-screen shadow-2xl fixed z-50 top-0 right-0 w-[60vw] bg-panel p-4"
@@ -58,6 +59,7 @@ export default function Hero() {
             </div>
           </div>
         </div>
+        
       )}
     </>
   );
