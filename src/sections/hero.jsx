@@ -8,6 +8,8 @@ import GetStarted from "@/components/ctaOne";
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
   const navRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
 
   {
     /* ———————————————————————————————————— outside click nav ——— */
@@ -24,16 +26,28 @@ export default function Hero() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
+
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-950">
-      <div className="flex justify-between p-4 text-highlight text-2xl font-header">
-        <a href="/">
-          <h1 className="font-medium">arqila.</h1>
-        </a>
-        <div>
-          <button onClick={() => setHideNav((prev) => !prev)}>
-            <FaBars className="duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
-          </button>
+      <div className={`fixed p-4 text-highlight w-full text-2xl font-header z-50 ${isScrolled ? "backdrop-blur-xs" : "bg-transparent"}`}>
+        <div className="flex justify-between items-center"> 
+          <a href="/">
+            <h1 className="font-medium">arqila.</h1>
+          </a>
+          <div>
+            <button onClick={() => setHideNav((prev) => !prev)}>
+              <FaBars className="duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -69,7 +83,7 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="flex justify-center pt-16 px-8">
+      <div className="flex justify-center pt-32 px-8">
         <div className="flex flex-col">
           <div className="p-2 mb-4">
             <h1 className="text-4xl text-header font-bold text-left leading-8">
