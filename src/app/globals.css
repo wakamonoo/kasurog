@@ -9,19 +9,20 @@
 /* ———————————————————————————————————— base layer ——— */
 @layer base {
   :root {
-    --color-bg: #e0f2fe; /* ———————————————————————————————————— primary bg ——— */
-    --color-accent: #0f172a; /* ———————————————————————————————————— header ——— */
-    --color-text: #1f2937; /* ———————————————————————————————————— normal text ——— */
-    --color-panel: #ffffff; /* ———————————————————————————————————— nav bg ——— */
-    --color-secondary: #bfdbfe; /* ———————————————————————————————————— second bg ——— */
-    --color-highlight: #f97316; /* ———————————————————————————————————— bg-orange-500 ——— */
-    --color-highlight-hover: #c2410c; /* ———————————————————————————————————— bg-orange-600 ——— */
+    --color-bg: #0a0e1a; /* Deep charcoal (premium dark base) */
+    --color-secondary: #1e293b; /* Dark blue-gray (for panels/cards) */
+    --color-panel: #0f172a; /* Your signature deep navy (nav/footer) */
+    --color-accent: #00a8e8; /* Electric blue (headers/accents) */
+    --color-text: #e2e8f0;
 
-    --font-heading: "Poppins", sans-serif; /* ———————————————————————————————————— header ——— */
-    --font-body: "Inter", sans-serif; /* ———————————————————————————————————— normal ——— */
-    --font-alt: "Rubik", sans-serif; /* ———————————————————————————————————— normal alt ——— */
-    --font-tall: "Montserrat", sans-serif; /* ———————————————————————————————————— big titles ——— */
-    --font-tall-alt: "Bebas Neue", cursive; /* ———————————————————————————————————— titles alt ——— */
+    --color-highlight: #00a8e8; /* Strong blue CTAs */
+    --color-highlight-hover: #00b4d8;
+
+    --font-heading: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-alt: "Rubik", sans-serif;
+    --font-tall: "Montserrat", sans-serif;
+    --font-tall-alt: "Bebas Neue", cursive;
   }
 
   body {

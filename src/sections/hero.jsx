@@ -4,12 +4,13 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import CarHero from "../assets/heroCar.png";
 import GetStarted from "@/components/ctaOne";
+import SignUp from "@/components/signup";
 
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
   const navRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [showSignUp, setShowSignUp] = useState(false);
 
   {
     /* ———————————————————————————————————— outside click nav ——— */
@@ -29,17 +30,27 @@ export default function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight);
-    }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-    }
+    };
   }, []);
+
+  useEffect(() => {
+    if(showSignUp === true) {
+      setHideNav(false);
+    }
+  },[showSignUp]);
 
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-950">
-      <div className={`fixed p-4 text-highlight w-full text-2xl font-header z-50 ${isScrolled ? "backdrop-blur-xs" : "bg-transparent"}`}>
-        <div className="flex justify-between items-center"> 
+      <div
+        className={`fixed p-4 text-highlight w-full text-2xl font-header z-50 ${
+          isScrolled ? "backdrop-blur-xs" : "bg-transparent"
+        }`}
+      >
+        <div className="flex justify-between items-center">
           <a href="/">
             <h1 className="font-medium">arqila.</h1>
           </a>
@@ -53,16 +64,16 @@ export default function Hero() {
 
       {/* ———————————————————————————————————— nav section ——— */}
       {hideNav && (
-        <div className="contains">
+        <div className="contents">
           <div className="inset-0 fixed backdrop-blur-xs pointer-events-none z-50"></div>
           <div
             ref={navRef}
-            className="h-screen shadow-2xl fixed z-50 top-0 right-0 w-[60vw] bg-highlight p-4"
+            className="h-screen shadow-2xl fixed z-50 top-0 right-0 w-[60vw] bg-panel p-4"
           >
             <button onClick={() => setHideNav(false)}>
               <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
             </button>
-            <div className="flex flex-col p-4 gap-2 font-normal text-normal text-base sm:text-xl md:text-2xl">
+            <div className="flex flex-col p-4 gap-2 font-normal text-normal text-base sm:text-xl md:text-2xl z-[60]">
               <a href="">
                 <p>home</p>
               </a>
@@ -75,7 +86,10 @@ export default function Hero() {
               <a href="">
                 <p>contact</p>
               </a>
-              <a href="">
+              <a
+                onClick={() => setShowSignUp((prev) => !prev)}
+                className="flex"
+              >
                 <p>sign-up</p>
               </a>
             </div>
@@ -102,6 +116,12 @@ export default function Hero() {
           />
         </div>
       </div>
+
+      {showSignUp && (
+        <div className="fixed inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
+          <SignUp onClose={() => setShowSignUp(false)} />
+        </div>
+      )}
     </div>
   );
 }
