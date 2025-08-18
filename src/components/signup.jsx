@@ -1,27 +1,27 @@
 "use client";
+import { googleSignUp } from "@/firebase/firebaseConfig";
 import { FaTimes } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { signInWithGoogle } from "@/firebase/firebaseConfig";
 import Swal from "sweetalert2";
 
 export default function SignUp({ onClose }) {
-  const handleGoogleSignIn = async () => {
-    const { user, error } = await signInWithGoogle();
+  const handleSignIn = async () => {
+    const { user, error } = await googleSignUp();
     if (user) {
       onClose();
       Swal.fire({
         title: "success!",
         html: `
-    <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-      <p style="margin: 0; font-size: 16px; font-weight: normal;">
-        Signed in as
-      </p>
-      <img src="${user.photoURL}" alt="user" style="width: 40px; height: 40px; border-radius: 50%;" />
-      <p style="margin: 0; font-size: 16px; font-weight: normal;">
-        ${user.displayName}
-      </p>
-    </div>
-  `,
+              <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <p style="margin: 0; font-size: 16px; font-weight: normal;">
+                  Signed in as
+                </p>
+                <img src="${user.photoURL}" alt="user" style="width: 40px; height: 40px; border-radius: 50%;" />
+                <p style="margin: 0; font-size: 16px; font-weight: normal;">
+                  ${user.displayName}
+                </p>
+              </div>
+            `,
         icon: "success",
         timer: 2000,
         showConfirmButton: false,
@@ -43,7 +43,7 @@ export default function SignUp({ onClose }) {
       </button>
       <div className="flex justify-center">
         <button
-          onClick={handleGoogleSignIn}
+          onClick={handleSignIn}
           className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-fit mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
         >
           continue with google

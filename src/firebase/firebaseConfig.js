@@ -15,16 +15,14 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async () => {
+export const googleSignUp = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    // Get Firebase ID token (we’ll send this to backend)
     const token = await user.getIdToken();
-
     return { user, token, error: null };
-  } catch (error) {
+  } catch {
     return { user: null, token: null, error };
   }
 };
