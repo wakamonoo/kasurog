@@ -38,10 +38,10 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if(showSignUp === true) {
+    if (showSignUp === true) {
       setHideNav(false);
     }
-  },[showSignUp]);
+  }, [showSignUp]);
 
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-950">
