@@ -15,8 +15,8 @@ export default function Cars() {
       </div>
 
       {/* ———————————————————————————————————— cars card ——— */}
-      <div className="flex flex-col gap-4 p-4">
-        <div className="flex flex-col p-8 shadow-2xl rounded bg-panel">
+      <div className="flex flex-col gap-4 p-8">
+        <div className="flex flex-col p-4 shadow-2xl rounded bg-panel">
           <Image src={Starrex} alt="car" />
           <h2 className="text-heading font-heading text-base font-semibold">
             HYUNDAI STARREX
@@ -31,7 +31,7 @@ export default function Cars() {
           </div>
         </div>
 
-        <div className="flex flex-col p-8 shadow-2xl rounded bg-panel">
+        <div className="flex flex-col p-4 shadow-2xl rounded bg-panel">
           <Image src={Starrex} alt="car" />
           <h2 className="text-heading font-heading text-base font-semibold">
             HYUNDAI STARREX
