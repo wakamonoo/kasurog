@@ -29,6 +29,7 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+// ✅ FIX: Bebas Neue import must be Bebas_Neue
 const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
   weight: "400",

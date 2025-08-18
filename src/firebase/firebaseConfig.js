@@ -1,51 +1,32 @@
-// src/firebase/firebaseConfig.js
-import { initializeApp, getApps, getApp } from "firebase/app";
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+"use client";
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCsl9-xgWLv6ROabth0gjdtXjNmnOoqpXc",
-  authDomain: "arqila-ae7db.firebaseapp.com",
-  projectId: "arqila-ae7db",
-  storageBucket: "arqila-ae7db.firebasestorage.app",
-  messagingSenderId: "146764911650",
-  appId: "1:146764911650:web:27aadf647c91974a3de67b",
-  measurementId: "G-QJPHHHWEYZ",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase only once
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
-// Analytics (optional)
-let analytics;
-if (typeof window !== "undefined") {
-  analytics = getAnalytics(app);
-}
-
-// Auth setup
-export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
-
-// Google Sign-In helper
 export const signInWithGoogle = async () => {
   try {
-    const result = await signInWithPopup(auth, googleProvider);
+    const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    return { user };
+
+    // Get Firebase ID token (we’ll send this to backend)
+    const token = await user.getIdToken();
+
+    return { user, token, error: null };
   } catch (error) {
-    console.error("Google Sign-In Error:", error.message);
-    return { user: null, error };
+    return { user: null, token: null, error };
   }
 };
 
-// Logout helper
-export const logout = async () => {
-  await signOut(auth);
-};
-
-export default app;
+export { auth };

@@ -6,36 +6,57 @@ import Swal from "sweetalert2";
 
 export default function SignUp({ onClose }) {
   const handleGoogleSignIn = async () => {
-    const { user, error } = await signInWithGoogle();
-    if (user) {
-      onClose();
-      Swal.fire({
-        title: "success!",
-        html: `
-    <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-      <p style="margin: 0; font-size: 16px; font-weight: normal;">
-        Signed in as
-      </p>
-      <img src="${user.photoURL}" alt="user" style="width: 40px; height: 40px; border-radius: 50%;" />
-      <p style="margin: 0; font-size: 16px; font-weight: normal;">
-        ${user.displayName}
-      </p>
-    </div>
-  `,
-        icon: "success",
-        timer: 2000,
-        showConfirmButton: false,
+  const { user, token, error } = await signInWithGoogle();
+
+  if (user && token) {
+    try {
+      // Send token to backend
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
       });
-    } else if (error) {
+
+      const data = await res.json();
+
+      if (res.ok) {
+        onClose();
+        Swal.fire({
+          title: "Success!",
+          html: `
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <p style="margin: 0; font-size: 16px; font-weight: normal;">Signed in as</p>
+              <img src="${user.photoURL}" alt="user" style="width: 40px; height: 40px; border-radius: 50%;" />
+              <p style="margin: 0; font-size: 16px; font-weight: normal;">${user.displayName}</p>
+            </div>
+          `,
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } else {
+        throw new Error(data.error || "Failed to save user");
+      }
+    } catch (err) {
       Swal.fire({
-        title: "error!",
-        text: "something went wrong",
+        title: "Error!",
+        text: err.message,
         icon: "warning",
         timer: 2000,
         showConfirmButton: false,
       });
     }
-  };
+  } else if (error) {
+    Swal.fire({
+      title: "Error!",
+      text: "Something went wrong with Google Sign-In",
+      icon: "warning",
+      timer: 2000,
+      showConfirmButton: false,
+    });
+  }
+};
+
   return (
     <div className="bg-panel rounded left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-[60vh] fixed z-[70] p-4">
       <button onClick={onClose}>
