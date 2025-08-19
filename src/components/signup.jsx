@@ -6,36 +6,43 @@ import Swal from "sweetalert2";
 
 export default function SignUp({ onClose }) {
   const handleSignIn = async () => {
-    const { user, error } = await googleSignUp();
+    const { user, token, error } = await googleSignUp();
     if (user) {
-      onClose();
-      Swal.fire({
-        title: "success!",
-        html: `
-              <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-                <p style="margin: 0; font-size: 16px; font-weight: normal;">
-                  Signed in as
-                </p>
-                <img src="${user.photoURL}" alt="user" style="width: 40px; height: 40px; border-radius: 50%;" />
-                <p style="margin: 0; font-size: 16px; font-weight: normal;">
-                  ${user.displayName}
-                </p>
-              </div>
-            `,
-        icon: "success",
-        timer: 2000,
-        showConfirmButton: false,
-      });
+      try {
+        await fetch("https://localhost:4000/api/user/signup", {
+          method: "POST",
+          headers: { "Content-type" : "application/json" },
+          body: JSON.stringify({ token })
+        });
+        onClose();
+        Swal.fire({
+          title: "Success!",
+          html: `
+            <div style="display:flex;align-items:center;gap:8px;">
+              <img src="${user.photoURL}" style="width:40px;height:40px;border-radius:50%;"/>
+              <p>${user.displayName}</p>
+            </div>`,
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch (err) {
+        console.error(err);
+        Swal.fire({
+          title: "Error",
+          text: "Something went wrong",
+          icon: "warning",
+        });
+      }
     } else if (error) {
       Swal.fire({
-        title: "error!",
-        text: "something went wrong",
+        title: "Error",
+        text: "Something went wrong",
         icon: "warning",
-        timer: 2000,
-        showConfirmButton: false,
       });
     }
   };
+
   return (
     <div className="bg-panel rounded left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-[60vh] fixed z-[70] p-4">
       <button onClick={onClose}>
