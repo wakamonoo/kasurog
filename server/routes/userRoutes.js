@@ -39,9 +39,12 @@ router.post("/upgrade", async (req, res) => {
 
     await db
       .collection("users")
-      .updateOne({ uid }, { $set: { role: "seller" } });
+      .updateOne(
+        { uid },
+        { $set: { role: "seller" } }
+      );
 
-    res.status(200).json({ message: "user signed up" });
+    res.status(200).json({ message: "user upgraded to seller" });
   } catch (err) {
     console.error(err);
     res.status(401).json({ error: "token invalid " });

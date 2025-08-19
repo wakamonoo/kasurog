@@ -1,6 +1,7 @@
 "use client";
 import { googleSignUp } from "@/firebase/firebaseConfig";
 import { FaTimes } from "react-icons/fa";
+import { MdDriveEta } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { auth } from "@/firebase/firebaseConfig";
@@ -47,7 +48,11 @@ export default function SignUp({ onClose }) {
   const handleSellerUpgrade = async () => {
     const loggedUser = auth.currentUser;
     if (!loggedUser) {
-      alert("log in first");
+      Swal.fire({
+        title: "Error",
+        text: "Kindly sign-in first!",
+        icon: "warning",
+      });
     } else {
       const { token } = await googleSignUp();
       await fetch("http://localhost:4000/api/users/upgrade", {
@@ -55,29 +60,35 @@ export default function SignUp({ onClose }) {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ token }),
       });
-      alert("success");
+      onClose();
+      Swal.fire({
+        title: "Congrats",
+        text: "You are now on seller account",
+        icon: "Success",
+      });
     }
   };
 
   return (
-    <div className="bg-panel rounded left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-[60vh] fixed z-[70] p-4">
+    <div className="bg-panel shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-fit fixed z-[70] px-4 py-8 rounded-2xl">
       <button onClick={onClose}>
         <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
       </button>
-      <div className="flex justify-center">
+      <div className="flex gap-2 flex-col w-full items-center justify-center px-2 mt-4">
         <button
           onClick={handleSignIn}
-          className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-fit mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
+          className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer w-full justify-center"
         >
           continue with google
           <FcGoogle />
         </button>
+        <p className="text-normal text-sm font-normal">then:</p>
         <button
           onClick={handleSellerUpgrade}
-          className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-fit mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
+          className="flex justify-center items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-full mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
         >
-          continue
-          <FcGoogle />
+          driverpreneur register
+          <MdDriveEta />
         </button>
       </div>
     </div>

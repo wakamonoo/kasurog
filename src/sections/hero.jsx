@@ -90,7 +90,7 @@ export default function Hero() {
                 onClick={() => setShowSignUp((prev) => !prev)}
                 className="flex"
               >
-                <p>sign-up</p>
+                <p>auth</p>
               </a>
             </div>
           </div>
