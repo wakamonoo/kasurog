@@ -9,7 +9,7 @@ export default function SignUp({ onClose }) {
     const { user, token, error } = await googleSignUp();
     if (user) {
       try {
-        await fetch("https://localhost:4000/api/user/signup", {
+        await fetch("http://localhost:4000/api/users/signup", {
           method: "POST",
           headers: { "Content-type" : "application/json" },
           body: JSON.stringify({ token })

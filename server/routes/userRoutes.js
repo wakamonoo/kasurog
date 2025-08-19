@@ -1,6 +1,6 @@
 import express from "express";
-import clientPromise from "../lib/mongodb";
-import admin from "../lib/firebaseAdmin";
+import clientPromise from "../lib/mongodb.js";
+import admin from "../lib/firebaseAdmin.js";
 
 const router = express.Router();
 
