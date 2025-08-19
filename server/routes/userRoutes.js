@@ -6,23 +6,25 @@ const router = express.Router();
 
 router.post("/signup", async (req, res) => {
   const { token } = req.body;
-  try{
+  try {
     const decoded = await admin.auth().verifyIdToken(token);
     const { uid, email, name } = decoded;
 
     const client = await clientPromise;
     const db = client.db("arqila");
 
-    await db.collection("users").updateOne(
-      { uid },
-      { $setOnInsert: { uid, email, name, role: "user" }},
-      { upsert: true }
-    );
+    await db
+      .collection("users")
+      .updateOne(
+        { uid },
+        { $setOnInsert: { uid, email, name, role: "user" } },
+        { upsert: true }
+      );
 
     res.status(200).json({ message: "user signed up" });
-  } catch(err) {
+  } catch (err) {
     console.error(err);
-    res.status(401).json({ error: "token invalid "});
+    res.status(401).json({ error: "token invalid " });
   }
 });
 

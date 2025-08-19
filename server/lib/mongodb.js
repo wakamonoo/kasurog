@@ -9,7 +9,7 @@ const options = {};
 let client;
 let clientPromise;
 
-if(!global.mongoClient) {
+if (!global.mongoClient) {
   client = new MongoClient(uri, options);
   global.mongoClient = client.connect();
 }
