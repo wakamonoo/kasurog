@@ -3,6 +3,7 @@ import { googleSignUp } from "@/firebase/firebaseConfig";
 import { FaTimes } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
+import { auth } from "@/firebase/firebaseConfig";
 
 export default function SignUp({ onClose }) {
   const handleSignIn = async () => {
@@ -11,8 +12,8 @@ export default function SignUp({ onClose }) {
       try {
         await fetch("http://localhost:4000/api/users/signup", {
           method: "POST",
-          headers: { "Content-type" : "application/json" },
-          body: JSON.stringify({ token })
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ token }),
         });
         onClose();
         Swal.fire({
@@ -43,6 +44,21 @@ export default function SignUp({ onClose }) {
     }
   };
 
+  const handleSellerUpgrade = async () => {
+    const loggedUser = auth.currentUser;
+    if (!loggedUser) {
+      alert("log in first");
+    } else {
+      const { token } = await googleSignUp();
+      await fetch("http://localhost:4000/api/users/upgrade", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ token }),
+      });
+      alert("success");
+    }
+  };
+
   return (
     <div className="bg-panel rounded left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-[60vh] fixed z-[70] p-4">
       <button onClick={onClose}>
@@ -54,6 +70,13 @@ export default function SignUp({ onClose }) {
           className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-fit mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
         >
           continue with google
+          <FcGoogle />
+        </button>
+        <button
+          onClick={handleSellerUpgrade}
+          className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-fit mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
+        >
+          continue
           <FcGoogle />
         </button>
       </div>
