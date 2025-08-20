@@ -17,13 +17,13 @@ export default function Cars() {
       {/* ———————————————————————————————————— cars card ——— */}
       <div className="flex flex-col gap-4 p-8">
         <div className="flex flex-col p-4 shadow-2xl rounded bg-panel">
-          <div className="absolute bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl text-xs font-bold px-4 rounded mt-2 ml-2 outline-1">
-            <p>DIESEL</p>
-          </div>
-          <Image src={Starrex} alt="car" />
-          <h2 className="text-heading text-center font-heading text-base mt-4 font-semibold">
+          <p className="absolute bg-highlight px-6 p-2 text-base font-heading -skew-x-12 right-10 mt-1 shadow-2xl">diesel</p>
+          <div>
+            <Image src={Starrex} alt="car" />
+          <h2 className="text-header text-center font-heading text-base mt-4 font-semibold">
             HYUNDAI STARREX
           </h2>
+          </div>
 
           <div className="flex flex-col">
             <div className="flex items-center justify-center gap-2">
@@ -40,13 +40,13 @@ export default function Cars() {
         </div>
 
         <div className="flex flex-col p-4 shadow-2xl rounded bg-panel">
-          <div className="absolute bg-[var(--color-text)] text-[var(--color-bg)] shadow-2xl text-xs font-bold px-4 rounded mt-2 ml-2 outline-1">
-            <p>DIESEL</p>
-          </div>
-          <Image src={Starrex} alt="car" />
-          <h2 className="text-heading text-center font-heading text-base mt-4 font-semibold">
+          <p className="absolute bg-highlight px-6 p-2 text-base font-heading -skew-x-12 right-10 mt-1 shadow-2xl">diesel</p>
+          <div>
+            <Image src={Starrex} alt="car" />
+          <h2 className="text-header text-center font-heading text-base mt-4 font-semibold">
             HYUNDAI STARREX
           </h2>
+          </div>
 
           <div className="flex flex-col">
             <div className="flex items-center justify-center gap-2">
