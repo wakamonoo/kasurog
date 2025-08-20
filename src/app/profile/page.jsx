@@ -31,9 +31,6 @@ export default function Profile() {
           <div className="flex flex-col gap-2 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <FaUserAltSlash className="text-7xl" />
             <p className="text-normal font-normal text-center leading-3">kindly log in first to access this page</p>
-            <button className="bg-highlight p-2">
-              go to login
-            </button>
           </div>
         )}
       </div>
