@@ -92,6 +92,9 @@ export default function Hero() {
               >
                 <p>auth</p>
               </a>
+              <a href="/profile">
+                <p>profile</p>
+              </a>
             </div>
           </div>
         </div>
