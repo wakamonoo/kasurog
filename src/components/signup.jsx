@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "@/firebase/firebaseConfig";
 import { googleSignUp } from "@/firebase/firebaseConfig";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCar, FaGoogle } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
@@ -9,6 +9,20 @@ import Swal from "sweetalert2";
 
 export default function SignUp({ onClose }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const divRef = useRef();
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (divRef.current && !divRef.current.contains(e.target)) {
+        onClose();
+      }
+    }
+
+    document.addEventListener("mousedown", handleClick);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((loggedIn) => {
@@ -36,8 +50,10 @@ export default function SignUp({ onClose }) {
       if (error) {
         Swal.fire({
           title: "Error",
-          text: "Something went wrong",
-          icon: "warning",
+          text: "Unexpect error occured",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
         });
         console.error(error);
       }
@@ -62,6 +78,13 @@ export default function SignUp({ onClose }) {
             showConfirmButton: false,
           });
         } catch (err) {
+          Swal.fire({
+            title: "Error",
+            text: "Unexpect error occured",
+            icon: "error",
+            timer: 2000,
+            showConfirmButton: false,
+          });
           console.error(err);
         }
       }
@@ -71,7 +94,13 @@ export default function SignUp({ onClose }) {
   const handleDriver = async () => {
     if (!isLoggedIn) {
       onClose();
-      alert("fcking log in");
+      Swal.fire({
+        title: "Warning",
+        text: "Kindly login first",
+        icon: "warning",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     } else {
       try {
         const { token } = await googleSignUp();
@@ -80,16 +109,30 @@ export default function SignUp({ onClose }) {
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({ token }),
         });
-        alert("upgraded");
+        Swal.fire({
+          title: "Congratulations",
+          text: "You're now a Driverpreneur!",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
       } catch (err) {
-        alert(err);
+        Swal.fire({
+          title: "Error",
+          text: "Unexpect error occured",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
       }
     }
   };
 
   return (
-    <div className="flex bg-panel p-4 w-fill rounded">
-      <MdClose />
+    <div ref={divRef} className="flex bg-panel p-4 w-fill rounded-2xl">
+      <button onClick={onClose} className="flex">
+        <MdClose />
+      </button>
       <div className="p-4 mt-4 flex flex-col gap-4 justify-center items-center">
         <button
           onClick={handleSignIn}
@@ -108,7 +151,10 @@ export default function SignUp({ onClose }) {
           )}
         </button>
         <p className="text-xs font-normal">or:</p>
-        <button onClick={handleDriver} className="flex items-center justify-center gap-2 bg-highlight p-2 px-4 w-full rounded-2xl">
+        <button
+          onClick={handleDriver}
+          className="flex items-center justify-center gap-2 bg-highlight p-2 px-4 w-full rounded-2xl"
+        >
           <p>driverpreneur sign-up</p>
           <FaCar />
         </button>
