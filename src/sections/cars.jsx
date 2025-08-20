@@ -4,7 +4,7 @@ import MessageOwner from "@/components/message";
 
 export default function Cars() {
   return (
-    <div className="p-4 mt-16">
+    <div className="p-12 mt-16">
       <div className="flex justify-center mb-16">
         <div className="flex flex-col leading-3">
           <h1 className="text-4xl font-bold text-center">the cars</h1>
@@ -15,7 +15,7 @@ export default function Cars() {
       </div>
 
       {/* ———————————————————————————————————— cars card ——— */}
-      <div className="flex flex-col gap-4 p-8">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col p-4 shadow-2xl rounded bg-panel">
           <p className="absolute bg-highlight px-6 p-2 text-base font-heading -skew-x-12 right-10 mt-1 shadow-2xl">diesel</p>
           <div>

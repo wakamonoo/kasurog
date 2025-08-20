@@ -2,7 +2,7 @@ import { MdDriveEta, MdSecurity, MdVerified } from "react-icons/md";
 
 export default function About() {
   return (
-    <div className="p-4 mt-16">
+    <div className="p-12 mt-16">
       <div className="flex justify-center mb-16">
         <div className="flex flex-col leading-3">
           <h1 className="text-4xl font-bold text-center">why arqila?</h1>
@@ -12,7 +12,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="p-8">
+      <div>
         <p className="flex justify-center text-justify text-normal font-normal">
           At Arqila, we make car rentals effortless and flexible. Whether you
           want to drive yourself or prefer a professional driver, we provide
