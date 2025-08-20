@@ -1,30 +1,28 @@
 "use client";
-import { googleSignUp } from "@/firebase/firebaseConfig";
-import { FaTimes } from "react-icons/fa";
-import { MdDriveEta } from "react-icons/md";
-import { FcGoogle } from "react-icons/fc";
-import { FaSignOutAlt } from "react-icons/fa";
-import Swal from "sweetalert2";
 import { auth } from "@/firebase/firebaseConfig";
+import { googleSignUp } from "@/firebase/firebaseConfig";
 import { useEffect, useState } from "react";
+import { FaCar, FaGoogle } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import { MdClose } from "react-icons/md";
+import Swal from "sweetalert2";
 
 export default function SignUp({ onClose }) {
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((u) => {
-      setUser(u);
+    const unsubscribe = auth.onAuthStateChanged((loggedIn) => {
+      setIsLoggedIn(loggedIn);
     });
-
     return () => {
       unsubscribe();
     };
   }, []);
 
   const handleSignIn = async () => {
-    if (user) {
+    if (isLoggedIn) {
       await auth.signOut();
-      setUser(null);
+      setIsLoggedIn(null);
       onClose();
       Swal.fire({
         title: "Logged out",
@@ -34,10 +32,16 @@ export default function SignUp({ onClose }) {
         showConfirmButton: false,
       });
     } else {
-      const { user: loggedUser, token, error } = await googleSignUp();
-      setUser(loggedUser);
-      if (loggedUser) {
-        setUser(loggedUser);
+      const { user, token, error } = await googleSignUp();
+      if (error) {
+        Swal.fire({
+          title: "Error",
+          text: "Something went wrong",
+          icon: "warning",
+        });
+        console.error(error);
+      }
+      if (user) {
         try {
           await fetch("http://localhost:4000/api/users/signup", {
             method: "POST",
@@ -50,8 +54,8 @@ export default function SignUp({ onClose }) {
             html: `
             <div style="display:flex;align-items:center;gap:8px;justify-content: center;">
               <p>logged in as</p>
-              <img src="${loggedUser.photoURL}" style="width:40px;height:40px;border-radius:50%;"/>
-              <p>${loggedUser.displayName}</p>
+              <img src="${user.photoURL}" style="width:40px;height:40px;border-radius:50%;"/>
+              <p>${user.displayName}</p>
             </div>`,
             icon: "success",
             timer: 2000,
@@ -59,66 +63,54 @@ export default function SignUp({ onClose }) {
           });
         } catch (err) {
           console.error(err);
-          Swal.fire({
-            title: "Error",
-            text: "Something went wrong",
-            icon: "warning",
-          });
         }
-      } else if (error) {
-        Swal.fire({
-          title: "Error",
-          text: "Something went wrong",
-          icon: "warning",
-        });
       }
     }
   };
 
-  const handleSellerUpgrade = async () => {
-    const loggedUser = auth.currentUser;
-    if (!loggedUser) {
-      Swal.fire({
-        title: "Error",
-        text: "Kindly sign-in first!",
-        icon: "warning",
-      });
-    } else {
-      const { token } = await googleSignUp();
-      await fetch("http://localhost:4000/api/users/upgrade", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ token }),
-      });
+  const handleDriver = async () => {
+    if (!isLoggedIn) {
       onClose();
-      Swal.fire({
-        title: "Congrats",
-        text: "You are now on seller account",
-        icon: "Success",
-      });
+      alert("fcking log in");
+    } else {
+      try {
+        const { token } = await googleSignUp();
+        await fetch("http://localhost:4000/api/users/upgrade", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+        alert("upgraded");
+      } catch (err) {
+        alert(err);
+      }
     }
   };
 
   return (
-    <div className="bg-panel shadow-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2  w-[80vw] h-fit fixed z-[70] px-4 py-8 rounded-2xl">
-      <button onClick={onClose}>
-        <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
-      </button>
-      <div className="flex gap-2 flex-col w-full items-center justify-center px-2 mt-4">
+    <div className="flex bg-panel p-4 w-fill rounded">
+      <MdClose />
+      <div className="p-4 mt-4 flex flex-col gap-4 justify-center items-center">
         <button
           onClick={handleSignIn}
-          className="flex items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer w-full justify-center"
+          className="bg-highlight p-2 px-4 w-full rounded-2xl"
         >
-          {user ? "logout" : "continue with google"}
-          {user ? <FaSignOutAlt /> : <FcGoogle />}
+          {isLoggedIn ? (
+            <div className="flex items-center justify-center gap-2">
+              <p>log-out account</p>
+              <FiLogOut />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2">
+              <p>sign in with google</p>
+              <FaGoogle />
+            </div>
+          )}
         </button>
-        <p className="text-normal text-sm font-normal">then:</p>
-        <button
-          onClick={handleSellerUpgrade}
-          className="flex justify-center items-center gap-2 bg-highlight p-2 px-4 rounded-full text-base font-normal text-normal py-2 bg-highlight w-full mt-2 duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer"
-        >
-          driverpreneur register
-          <MdDriveEta />
+        <p className="text-xs font-normal">or:</p>
+        <button onClick={handleDriver} className="flex items-center justify-center gap-2 bg-highlight p-2 px-4 w-full rounded-2xl">
+          <p>driverpreneur sign-up</p>
+          <FaCar />
         </button>
       </div>
     </div>
