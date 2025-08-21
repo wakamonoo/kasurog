@@ -10,6 +10,8 @@ export default function Profile() {
   const [user, setUser] = useState(null);
   const [driverApp, setDriverApp] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showInfo, setShowInfo] = useState(true);
+  const [showDriver, setShowDiver] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((logged) => {
@@ -26,32 +28,15 @@ export default function Profile() {
     setDriverApp(true);
   }
 
-  const handleUpgrade = async () => {
-    try {
-      const { token } = await googleSignUp();
-      await fetch("http://localhost:4000/api/users/upgrade", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ token }),
-      });
-      Swal.fire({
-        title: "Congratulations",
-        text: "You're now a Driverpreneur!",
-        icon: "success",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    } catch (err) {
-      Swal.fire({
-        title: "Error",
-        text: "Can't sign you up",
-        icon: "error",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-      console.error(err);
-    }
-  };
+  function handleDriverTab() {
+    setShowInfo(false);
+    setShowDiver(true);
+  }
+
+  function handleInfoTab() {
+    setShowInfo(true);
+    setShowDiver(false);
+  }
 
   return (
     <div className="p-8">
@@ -78,6 +63,28 @@ export default function Profile() {
               <FaCar />
             </button>
           </div>
+
+          <div className="flex justify-center items-center gap-8 mt-8">
+            <button onClick={handleInfoTab} className={`pb-2 ${showInfo ? "border-b-2 border-[var(--color-highlight)]" : "border-none"}`}>
+              <p className="text-normal font-normal">Personal Info</p>
+            </button>
+            <button onClick={handleDriverTab} className={`pb-2 ${showDriver ? "border-b-2 border-[var(--color-highlight)]" : "border-none"}`}>
+              <p className="text-normal font-normal">Driver Page</p>
+            </button>
+          </div>
+
+          {showInfo && (
+            <div className="flex flex-col gap-2 p-4">
+              <p className="text-header font-heading">Full Name: <span className="font-normal text-normal">Joven Bataller</span></p>
+              <p className="text-header font-heading">Email: <span className="font-normal text-normal">Joven Bataller</span></p>
+              <p className="text-header font-heading">Contact: <span className="font-normal text-normal">Joven Bataller</span></p>
+              <p className="text-header font-heading">Address: <span className="font-normal text-normal">Joven Bataller</span></p>
+              <button className="flex mt-4 p-4 bg-highlight rounded w-fit">
+                <p>edit information</p>
+              </button>
+            </div>
+          )}
+          {showDriver && <p>handle driver</p>}
         </div>
       ) : (
         <div className="flex flex-col gap-2 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
