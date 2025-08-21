@@ -62,8 +62,8 @@ export default function Profile() {
   }, []);
 
   const handleInputChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value}));
+  }
 
   const handleSubmit = async () => {
     try {
