@@ -112,18 +112,18 @@ export default function Profile() {
               <p className="text-header font-heading">
                 Full Name:
                 <br />
-                <span className="font-normal text-normal">{user.name}</span>
+                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">{user.name}</span>
               </p>
               <p className="text-header font-heading">
                 Email:
                 <br />
-                <span className="font-normal text-normal">{user.email}</span>
+                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">{user.email}</span>
               </p>
               <p className="text-header font-heading">
                 Contact:
                 <br />
                 <span
-                  className={`font-normal ${
+                  className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
                     !user.contact ? "italic text-gray-500" : "text-normal"
                   }`}
                 >
@@ -134,7 +134,7 @@ export default function Profile() {
                 Address:
                 <br />
                 <span
-                  className={`font-normal ${
+                  className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
                     !user.address ? "italic text-gray-500" : "text-normal"
                   }`}
                 >
@@ -175,6 +175,7 @@ export default function Profile() {
                 type="text"
                 placeholder="Full Name"
                 className="rounded bg-second font-normal text-sm w-[80vw] p-2"
+                defaultValue={user.name}
               />
               <input
                 type="text"
