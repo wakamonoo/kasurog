@@ -168,8 +168,9 @@ export default function Profile() {
           </div>
 
           {showInfo && (
-            <div className="flex flex-col gap-2 p-4">
-              <p className="text-header font-heading">
+            <div className="flex justify-center items-center flex-col gap-2 p-4">
+              <div>
+                <p className="text-header font-heading">
                 Full Name:
                 <br />
                 <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
@@ -211,6 +212,7 @@ export default function Profile() {
               >
                 <p>edit information</p>
               </button>
+              </div>
             </div>
           )}
           {showDriver && <p>handle driver</p>}
