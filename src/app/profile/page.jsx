@@ -4,14 +4,17 @@ import { auth, googleSignUp } from "@/firebase/firebaseConfig";
 import { useState, useEffect } from "react";
 import { FaArrowLeft, FaUserAltSlash, FaCar } from "react-icons/fa";
 import Swal from "sweetalert2";
+import Loader from "@/components/loader";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
   const [driverApp, setDriverApp] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((logged) => {
       setUser(logged);
+      setLoading(false);
     });
 
     return () => {
@@ -56,7 +59,11 @@ export default function Profile() {
         <FaArrowLeft />
       </a>
 
-      {user ? (
+      {loading ? (
+        <div className="flex justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-4">
+          <Loader />
+        </div>
+      ) : user ? (
         <div>
           <div className="flex flex-col justify-center items-center gap-2 mt-8">
             <img src={user.photoURL} className="w-24 rounded-full" alt="user" />
