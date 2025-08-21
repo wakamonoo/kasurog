@@ -2,7 +2,7 @@
 import { auth } from "@/firebase/firebaseConfig";
 import { googleSignUp } from "@/firebase/firebaseConfig";
 import { useEffect, useRef, useState } from "react";
-import { FaCar, FaGoogle } from "react-icons/fa";
+import { FaGoogle } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import Swal from "sweetalert2";
