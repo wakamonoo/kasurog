@@ -30,17 +30,17 @@ export default function DriverApp({ onExit }) {
           <p className="">kindly upload your driver's license:</p>
           <input
             type="file"
-            className="bg-second font-normal text-sm w-[80vw] p-2"
+            className="bg-second font-normal text-sm w-[80vw] p-2 rounded "
           />
         </div>
         <div>
           <p>kindly upload your vehicle's or/cr:</p>
           <input
             type="file"
-            className="bg-second font-normal text-sm w-[80vw] p-2"
+            className="bg-second font-normal text-sm w-[80vw] p-2 rounded "
           />
         </div>
-        <button className="text-normal font-normal bg-highlight p-2 rounded">apply now</button>
+        
       </div>
     </div>
   );
