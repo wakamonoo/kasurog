@@ -16,10 +16,11 @@ export default function Profile() {
   const [showDriver, setShowDiver] = useState(false);
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
+  const [form, setForm] = useState({ name: "", contact: "", address: "" });
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (logged) => {
-      setFbAuth(logged)
+      setFbAuth(logged);
       if (logged) {
         try {
           const res = await fetch(
@@ -27,6 +28,12 @@ export default function Profile() {
           );
           const dbUser = await res.json();
           setUser(dbUser);
+
+          setForm({
+            name: dbUser.name || "",
+            contact: dbUser.contact || "",
+            address: dbUser.address || "",
+          });
         } catch (err) {
           console.error("failed to fetch user from db, error:", err);
         }
@@ -43,16 +50,65 @@ export default function Profile() {
 
   useEffect(() => {
     function handleEdit(e) {
-      if(divRef.current && !divRef.current.contains(e.target)) {
-      setEdit(false)
+      if (divRef.current && !divRef.current.contains(e.target)) {
+        setEdit(false);
+      }
     }
-    }
-    
+
     document.addEventListener("mousedown", handleEdit);
-    return() => {
+    return () => {
       document.removeEventListener("mousedown", handleEdit);
+    };
+  }, []);
+
+  const handleInputChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch("http://localhost:4000/api/users/updateUser", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: fbAuth.uid,
+          ...form,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Profile Updated",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setUser((prev) => ({ ...prev, ...form }));
+        setEdit(false);
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: data.error || "Updated Failed",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+          title: "Error",
+          text: "Server Failed, try again later",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
     }
-  }, [])
+  };
 
   return (
     <div className="p-8">
@@ -67,7 +123,11 @@ export default function Profile() {
       ) : user ? (
         <div>
           <div className="flex flex-col justify-center items-center gap-2 mt-8">
-            <img src={fbAuth.photoURL} className="w-24 rounded-full" alt="user" />
+            <img
+              src={fbAuth.photoURL}
+              className="w-24 rounded-full"
+              alt="user"
+            />
             <p className="text-header font-normal">{fbAuth.displayName}</p>
           </div>
           <div className="flex justify-center">
@@ -112,12 +172,16 @@ export default function Profile() {
               <p className="text-header font-heading">
                 Full Name:
                 <br />
-                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">{user.name}</span>
+                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                  {user.name}
+                </span>
               </p>
               <p className="text-header font-heading">
                 Email:
                 <br />
-                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">{user.email}</span>
+                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                  {user.email}
+                </span>
               </p>
               <p className="text-header font-heading">
                 Contact:
@@ -166,7 +230,10 @@ export default function Profile() {
 
       {edit && (
         <div className="fixed inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
-          <div ref={divRef} className="flex absolute justify-center items center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-panel p-4">
+          <div
+            ref={divRef}
+            className="flex absolute justify-center items center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-panel p-4"
+          >
             <div className="">
               <MdClose onClick={() => setEdit(false)} />
             </div>
@@ -174,20 +241,31 @@ export default function Profile() {
               <input
                 type="text"
                 placeholder="Full Name"
+                name="name"
+                value={form.name}
+                onChange={handleInputChange}
                 className="rounded bg-second font-normal text-sm w-[80vw] p-2"
-                defaultValue={user.name}
               />
               <input
                 type="text"
                 placeholder="Contact Number"
+                name="contact"
+                value={form.contact}
+                onChange={handleInputChange}
                 className="rounded  bg-second font-normal text-sm w-[80vw] p-2"
               />
               <input
                 type="text"
                 placeholder="Address"
+                name="address"
+                value={form.address}
+                onChange={handleInputChange}
                 className="rounded  bg-second font-normal text-sm w-[80vw] p-2"
               />
-              <button className="text-normal font-normal bg-highlight p-2 rounded">
+              <button
+                onClick={handleSubmit}
+                className="text-normal font-normal bg-highlight p-2 rounded"
+              >
                 submit
               </button>
             </div>
