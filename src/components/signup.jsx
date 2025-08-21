@@ -91,43 +91,6 @@ export default function SignUp({ onClose }) {
     }
   };
 
-  const handleDriver = async () => {
-    if (!isLoggedIn) {
-      onClose();
-      Swal.fire({
-        title: "Warning",
-        text: "Kindly login first",
-        icon: "warning",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-    } else {
-      try {
-        const { token } = await googleSignUp();
-        await fetch("http://localhost:4000/api/users/upgrade", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ token }),
-        });
-        Swal.fire({
-          title: "Congratulations",
-          text: "You're now a Driverpreneur!",
-          icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      } catch (err) {
-        Swal.fire({
-          title: "Error",
-          text: "Unexpect error occured",
-          icon: "error",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      }
-    }
-  };
-
   return (
     <div ref={divRef} className="flex bg-panel p-4 w-fill rounded-2xl">
       <button onClick={onClose} className="flex">
@@ -149,14 +112,6 @@ export default function SignUp({ onClose }) {
               <FaGoogle />
             </div>
           )}
-        </button>
-        <p className="text-xs font-normal">or:</p>
-        <button
-          onClick={handleDriver}
-          className="flex items-center justify-center gap-2 bg-highlight p-2 px-4 w-full rounded-2xl"
-        >
-          <p>driverpreneur sign-up</p>
-          <FaCar />
         </button>
       </div>
     </div>
