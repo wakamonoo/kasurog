@@ -21,10 +21,10 @@ export default function Profile() {
     car: "",
     year: "",
     seat: "",
-    fuel: "",
     price: "",
-    transmission: "manual",
-    aircon: "yes",
+    fuel: "",
+    transmission: "",
+    aircon: "",
     image: null,
   });
   const [addCar, setAddCar] = useState(false);
@@ -88,10 +88,13 @@ export default function Profile() {
         const formData = new FormData();
         formData.append("file", carForm.image);
 
-        const uploadRes = await fetch ("http://localhost:4000/api/images/imageUpload", {
-          method: "POST",
-          body: formData,
-        })
+        const uploadRes = await fetch(
+          "http://localhost:4000/api/images/imageUpload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         const uploadData = await uploadRes.json();
         if (!uploadRes.ok) {
@@ -406,43 +409,39 @@ export default function Profile() {
               />
               <input
                 type="text"
-                placeholder="fuel type"
-                name="fuel"
-                value={carForm.fuel}
-                onChange={handleCarInput}
-                className="bg-second p-2 rounded"
-              />
-
-              <input
-                type="text"
                 placeholder="starting price per day"
                 name="price"
                 value={carForm.price}
                 onChange={handleCarInput}
                 className="bg-second p-2 rounded"
               />
-
-              <label className="text-gray-500 font-normal text-base">
-                transmission:
-              </label>
+              <select
+                name="fuel"
+                onChange={handleCarInput}
+                value={carForm.fuel}
+                className="bg-second p-2 rounded text-gray-500"
+              >
+                <option value="null">select fuel type</option>
+                <option value="diesel">diesel</option>
+                <option value="gasoline">gasoline</option>
+              </select>
               <select
                 name="transmission"
                 onChange={handleCarInput}
                 value={carForm.transmission}
                 className="bg-second p-2 rounded text-gray-500"
               >
+                <option value="null">select transmission type</option>
                 <option value="Manual">Manual</option>
                 <option value="Automatic">Automatic</option>
               </select>
-              <label className="text-gray-500 font-normal text-base">
-                air-conditioned:
-              </label>
               <select
                 name="aircon"
                 onChange={handleCarInput}
                 value={carForm.aircon}
                 className="bg-second p-2 rounded text-gray-500"
               >
+                <option value="">air conditioning available?</option>
                 <option value="yes">yes</option>
                 <option value="no">no</option>
               </select>
