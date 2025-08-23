@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 const router = express.Router();
 
 router.put("/addCar", async (req, res) => {
-  const { uid, car, year, seat,  fuel, price, transmission, aircon } = req.body;
+  const { uid, car, year, seat,  fuel, price, transmission, aircon, image } = req.body;
   try {
     const client = await clientPromise;
     const db = client.db("arqila");
@@ -15,7 +15,7 @@ router.put("/addCar", async (req, res) => {
       .collection("cars")
       .updateOne(
         { carid: newID},
-        { $set: { uid, car, year, seat,  fuel, price, transmission, aircon } },
+        { $set: { uid, car, year, seat,  fuel, price, transmission, aircon, image } },
         { upsert: true }
       );
 

@@ -17,7 +17,16 @@ export default function Profile() {
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
   const [form, setForm] = useState({ name: "", contact: "", address: "" });
-  const [carForm, setCarForm] = useState({ car: "", year: "", seat: "", fuel: "", price: "", transmission: "manual", aircon: "yes" });
+  const [carForm, setCarForm] = useState({
+    car: "",
+    year: "",
+    seat: "",
+    fuel: "",
+    price: "",
+    transmission: "manual",
+    aircon: "yes",
+    image: null,
+  });
   const [addCar, setAddCar] = useState(false);
 
   useEffect(() => {
@@ -73,7 +82,26 @@ export default function Profile() {
 
   const handleCarSubmit = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/users/addCar", {
+      let imageURL = "";
+
+      if (carForm.image) {
+        const formData = new FormData();
+        formData.append("file", carForm.image);
+
+        const uploadRes = await fetch ("http://localhost:4000/api/images/imageUpload", {
+          method: "POST",
+          body: formData,
+        })
+
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) {
+          throw new Error(uploadData.error || "image upload failed");
+        }
+
+        imageURL = uploadData.url;
+      }
+
+      const res = await fetch("http://localhost:4000/api/cars/addCar", {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -81,6 +109,7 @@ export default function Profile() {
         body: JSON.stringify({
           uid: fbAuth.uid,
           ...carForm,
+          image: imageURL,
         }),
       });
 
@@ -93,7 +122,15 @@ export default function Profile() {
           timer: 2000,
           showConfirmButton: false,
         });
-        setCarForm({ car: "", year: "", seat: "", fuel: "", price: "", transmission: "", aircon: "" });
+        setCarForm({
+          car: "",
+          year: "",
+          seat: "",
+          fuel: "",
+          price: "",
+          transmission: "",
+          aircon: "",
+        });
         setAddCar(false);
       } else {
         Swal.fire({
@@ -385,20 +422,40 @@ export default function Profile() {
                 className="bg-second p-2 rounded"
               />
 
-              <label className="text-gray-500 font-normal text-base">transmission:</label>
-              <select name="transmission" onChange={handleCarInput} value={carForm.transmission} className="bg-second p-2 rounded text-gray-500">
+              <label className="text-gray-500 font-normal text-base">
+                transmission:
+              </label>
+              <select
+                name="transmission"
+                onChange={handleCarInput}
+                value={carForm.transmission}
+                className="bg-second p-2 rounded text-gray-500"
+              >
                 <option value="Manual">Manual</option>
                 <option value="Automatic">Automatic</option>
               </select>
-              <label className="text-gray-500 font-normal text-base">air-conditioned:</label>
-              <select name="aircon" onChange={handleCarInput} value={carForm.aircon} className="bg-second p-2 rounded text-gray-500">
+              <label className="text-gray-500 font-normal text-base">
+                air-conditioned:
+              </label>
+              <select
+                name="aircon"
+                onChange={handleCarInput}
+                value={carForm.aircon}
+                className="bg-second p-2 rounded text-gray-500"
+              >
                 <option value="yes">yes</option>
                 <option value="no">no</option>
               </select>
-              <label className="text-gray-500 font-normal text-base">upload or/cr:</label>
-              <input type="file" className="w-[70vw] bg-second p-2 rounded text-gray-500"/>
-              <label className="text-gray-500 font-normal text-base">upload driver's license:</label>
-              <input type="file" className="w-[70vw] bg-second p-2 rounded text-gray-500"/>
+              <label className="text-gray-500 font-normal text-base">
+                upload car image:
+              </label>
+              <input
+                type="file"
+                onChange={(e) =>
+                  setCarForm({ ...carForm, image: e.target.files[0] })
+                }
+                className="w-[70vw] bg-second p-2 rounded text-gray-500"
+              />
               <button
                 onClick={handleCarSubmit}
                 className="text-normal font-normal bg-highlight p-2 rounded"
