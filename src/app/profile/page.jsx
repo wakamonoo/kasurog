@@ -17,7 +17,7 @@ export default function Profile() {
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
   const [form, setForm] = useState({ name: "", contact: "", address: "" });
-  const [carForm, setCarForm] = useState({ car: "", fuel: "", price: "" });
+  const [carForm, setCarForm] = useState({ car: "", year: "", seat: "", fuel: "", price: "", transmission: "manual", aircon: "yes" });
   const [addCar, setAddCar] = useState(false);
 
   useEffect(() => {
@@ -79,6 +79,7 @@ export default function Profile() {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
+          uid: fbAuth.uid,
           ...carForm,
         }),
       });
@@ -92,7 +93,7 @@ export default function Profile() {
           timer: 2000,
           showConfirmButton: false,
         });
-        setUser((prev) => ({ ...prev, ...form }));
+        setCarForm({ car: "", year: "", seat: "", fuel: "", price: "", transmission: "", aircon: "" });
         setAddCar(false);
       } else {
         Swal.fire({
@@ -354,15 +355,7 @@ export default function Profile() {
                 type="text"
                 placeholder="year of manufacture"
                 name="year"
-                value={carForm.car}
-                onChange={handleCarInput}
-                className="bg-second p-2 rounded"
-              />
-              <input
-                type="text"
-                placeholder="transmission type"
-                name="transmission"
-                value={carForm.car}
+                value={carForm.year}
                 onChange={handleCarInput}
                 className="bg-second p-2 rounded"
               />
@@ -370,7 +363,7 @@ export default function Profile() {
                 type="text"
                 placeholder="seat capacity"
                 name="seat"
-                value={carForm.car}
+                value={carForm.seat}
                 onChange={handleCarInput}
                 className="bg-second p-2 rounded"
               />
@@ -391,8 +384,14 @@ export default function Profile() {
                 onChange={handleCarInput}
                 className="bg-second p-2 rounded"
               />
+
+              <label className="text-gray-500 font-normal text-base">transmission:</label>
+              <select name="transmission" onChange={handleCarInput} value={carForm.transmission} className="bg-second p-2 rounded text-gray-500">
+                <option value="Manual">Manual</option>
+                <option value="Automatic">Automatic</option>
+              </select>
               <label className="text-gray-500 font-normal text-base">air-conditioned:</label>
-              <select name="" id="" className="bg-second p-2 rounded text-gray-500">
+              <select name="aircon" onChange={handleCarInput} value={carForm.aircon} className="bg-second p-2 rounded text-gray-500">
                 <option value="yes">yes</option>
                 <option value="no">no</option>
               </select>
