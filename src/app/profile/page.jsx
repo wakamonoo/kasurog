@@ -17,6 +17,8 @@ export default function Profile() {
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
   const [form, setForm] = useState({ name: "", contact: "", address: "" });
+  const [carForm, setCarForm] = useState({ car: "", fuel: "", price: "" });
+  const [addCar, setAddCar] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (logged) => {
@@ -62,8 +64,56 @@ export default function Profile() {
   }, []);
 
   const handleInputChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value}));
-  }
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCarInput = (e) => {
+    setCarForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCarSubmit = async () => {
+    try {
+      const res = await fetch("http://localhost:4000/api/users/addCar", {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...carForm,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Profile Updated",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+        setUser((prev) => ({ ...prev, ...form }));
+        setAddCar(false);
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: data.error || "Updated Failed",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        title: "Error",
+        text: "Server Failed, try again later",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -101,12 +151,12 @@ export default function Profile() {
     } catch (err) {
       console.error(err);
       Swal.fire({
-          title: "Error",
-          text: "Server Failed, try again later",
-          icon: "error",
-          timer: 2000,
-          showConfirmButton: false,
-        });
+        title: "Error",
+        text: "Server Failed, try again later",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -171,51 +221,60 @@ export default function Profile() {
             <div className="flex justify-center items-center flex-col gap-2 p-4">
               <div>
                 <p className="text-header font-heading">
-                Full Name:
-                <br />
-                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
-                  {user.name}
-                </span>
-              </p>
-              <p className="text-header font-heading">
-                Email:
-                <br />
-                <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
-                  {user.email}
-                </span>
-              </p>
-              <p className="text-header font-heading">
-                Contact:
-                <br />
-                <span
-                  className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
-                    !user.contact ? "italic text-gray-500" : "text-normal"
-                  }`}
+                  Full Name:
+                  <br />
+                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                    {user.name}
+                  </span>
+                </p>
+                <p className="text-header font-heading">
+                  Email:
+                  <br />
+                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                    {user.email}
+                  </span>
+                </p>
+                <p className="text-header font-heading">
+                  Contact:
+                  <br />
+                  <span
+                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
+                      !user.contact ? "italic text-gray-500" : "text-normal"
+                    }`}
+                  >
+                    {user.contact || "contact not yet added"}
+                  </span>
+                </p>
+                <p className="text-header font-heading">
+                  Address:
+                  <br />
+                  <span
+                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
+                      !user.address ? "italic text-gray-500" : "text-normal"
+                    }`}
+                  >
+                    {user.address || "contact not yet added"}
+                  </span>
+                </p>
+                <button
+                  onClick={() => setEdit(true)}
+                  className="flex mt-4 p-4 bg-highlight rounded w-fit"
                 >
-                  {user.contact || "contact not yet added"}
-                </span>
-              </p>
-              <p className="text-header font-heading">
-                Address:
-                <br />
-                <span
-                  className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
-                    !user.address ? "italic text-gray-500" : "text-normal"
-                  }`}
-                >
-                  {user.address || "contact not yet added"}
-                </span>
-              </p>
-              <button
-                onClick={() => setEdit(true)}
-                className="flex mt-4 p-4 bg-highlight rounded w-fit"
-              >
-                <p>edit information</p>
-              </button>
+                  <p>edit information</p>
+                </button>
               </div>
             </div>
           )}
-          {showDriver && <p>handle driver</p>}
+          {showDriver && (
+            <div className="flex flex-col justify-center items-center mt-8">
+              <button
+                onClick={() => setAddCar(true)}
+                className="flex mt-4 p-4 bg-highlight rounded w-fit"
+              >
+                list a car
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="flex flex-col gap-2 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -269,6 +328,83 @@ export default function Profile() {
                 className="text-normal font-normal bg-highlight p-2 rounded"
               >
                 submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {addCar && (
+        <div className="fixed w-full inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
+          <div className="flex flex-col p-4 bg-panel justify-center items-center gap-4 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[90vw] max-w-md max-h-[80vh]">
+            <MdClose
+              onClick={() => setAddCar(false)}
+              className="absolute top-2 left-4"
+            />
+            <div className="flex flex-col gap-4 mt-8 overflow-y-auto pr-2">
+              <input
+                type="text"
+                placeholder="car model"
+                name="car"
+                value={carForm.car}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+              <input
+                type="text"
+                placeholder="year of manufacture"
+                name="year"
+                value={carForm.car}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+              <input
+                type="text"
+                placeholder="transmission type"
+                name="transmission"
+                value={carForm.car}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+              <input
+                type="text"
+                placeholder="seat capacity"
+                name="seat"
+                value={carForm.car}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+              <input
+                type="text"
+                placeholder="fuel type"
+                name="fuel"
+                value={carForm.fuel}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+
+              <input
+                type="text"
+                placeholder="starting price per day"
+                name="price"
+                value={carForm.price}
+                onChange={handleCarInput}
+                className="bg-second p-2 rounded"
+              />
+              <label className="text-gray-500 font-normal text-base">air-conditioned:</label>
+              <select name="" id="" className="bg-second p-2 rounded text-gray-500">
+                <option value="yes">yes</option>
+                <option value="no">no</option>
+              </select>
+              <label className="text-gray-500 font-normal text-base">upload or/cr:</label>
+              <input type="file" className="w-[70vw] bg-second p-2 rounded text-gray-500"/>
+              <label className="text-gray-500 font-normal text-base">upload driver's license:</label>
+              <input type="file" className="w-[70vw] bg-second p-2 rounded text-gray-500"/>
+              <button
+                onClick={handleCarSubmit}
+                className="text-normal font-normal bg-highlight p-2 rounded"
+              >
+                add car
               </button>
             </div>
           </div>

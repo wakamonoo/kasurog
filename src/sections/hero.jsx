@@ -115,6 +115,7 @@ export default function Hero() {
           <Image
             src={CarHero}
             alt="imageCar"
+            priority="true"
             className="object-cover w-[100vw] h-auto"
           />
         </div>
