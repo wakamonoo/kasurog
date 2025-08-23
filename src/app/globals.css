@@ -14,6 +14,7 @@
     --color-panel: #0f172a; /* Your signature deep navy (nav/footer) */
     --color-accent: #00a8e8; /* Electric blue (headers/accents) */
     --color-text: #e2e8f0;
+    --color-label: #6B7280;
 
     --color-highlight: #00a8e8; /* Strong blue CTAs */
     --color-highlight-hover: #00b4d8;
@@ -84,6 +85,10 @@
 
   .text-panel {
     color: var(--color-panel);
+  }
+
+  .text-label {
+    color: var(--color-label);
   }
 
   .text-highlight {
