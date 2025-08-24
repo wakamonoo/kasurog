@@ -7,11 +7,6 @@ import { FiLogOut } from "react-icons/fi";
 import { MdClose } from "react-icons/md";
 import Swal from "sweetalert2";
 
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://arqila.onrender.com"
-    : "http://localhost:4000";
-
 export default function SignUp({ onClose }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const divRef = useRef();
@@ -64,7 +59,7 @@ export default function SignUp({ onClose }) {
       }
       if (user) {
         try {
-          await fetch(`${BASE_URL}/api/users/signup`, {
+          await fetch("https://arqila.onrender.com/api/users/signup", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({ token }),

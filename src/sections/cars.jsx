@@ -6,13 +6,11 @@ import { FaBoxOpen, FaGasPump } from "react-icons/fa";
 import { GiGearStickPattern } from "react-icons/gi";
 import { MdAcUnit } from "react-icons/md";
 
-const BASE_URL = process.env.NODE_ENV === "production" ? "https://arqila.onrender.com" : "http://localhost:4000";
-
 export default function Cars() {
   const [carInfo, setCarInfo] = useState([]);
   useEffect(() => {
     const getCarinfo = async () => {
-      const res = await fetch(`${BASE_URL}/api/cars/carsDisplay`);
+      const res = await fetch("https://arqila.onrender.com/api/cars/carsDisplay");
       const carInf = await res.json();
       setCarInfo(carInf);
     };

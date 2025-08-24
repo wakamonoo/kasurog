@@ -6,10 +6,6 @@ import { FaArrowLeft, FaUserAltSlash, FaCar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose } from "react-icons/md";
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://arqila.onrender.com"
-    : "http://localhost:4000";
 
 export default function Profile() {
   const [fbAuth, setFbAuth] = useState(null);
@@ -38,7 +34,7 @@ export default function Profile() {
       setFbAuth(logged);
       if (logged) {
         try {
-          const res = await fetch(`${BASE_URL}/api/users/users/${logged.uid}`);
+          const res = await fetch(`https://arqila.onrender.com/api/users/users/${logged.uid}`);
           const dbUser = await res.json();
           setUser(dbUser);
 
@@ -90,7 +86,7 @@ export default function Profile() {
         const formData = new FormData();
         formData.append("file", carForm.image);
 
-        const uploadRes = await fetch(`${BASE_URL}/api/images/imageUpload`, {
+        const uploadRes = await fetch("https://arqila.onrender.com/api/images/imageUpload", {
           method: "POST",
           body: formData,
         });
@@ -103,7 +99,7 @@ export default function Profile() {
         imageURL = uploadData.url;
       }
 
-      const res = await fetch(`${BASE_URL}/api/cars/addCar`, {
+      const res = await fetch("https://arqila.onrender.com/api/cars/addCar", {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -157,7 +153,7 @@ export default function Profile() {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/api/users/updateUser`, {
+      const res = await fetch("https://arqila.onrender.com/api/users/updateUser", {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
