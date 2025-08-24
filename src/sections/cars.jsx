@@ -61,7 +61,7 @@ export default function Cars() {
                   <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase">
                     {car.car}
                   </h2>
-                  <div className="flex justify-center items-center gap-1">
+                  <div className="flex justify-center items-center gap-1 p-4">
                     <h2 className="text-3xl sm:text-4xl font-header text-header font-extrabold">
                       ₱{car.price}
                     </h2>
