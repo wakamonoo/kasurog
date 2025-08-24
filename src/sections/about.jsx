@@ -21,7 +21,7 @@ export default function About() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4 md:gap-8 mt-8">
-          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] p-4 bg-panel rounded-t-lg">
+          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] p-4 bg-panel rounded-t-lg">
             <MdDriveEta className="text-7xl sm:text-8xl md:text-9xl" />
             <h2 className="text-header text-center font-heading text-base sm:text-xl md:text-2xl font-semibold leading-4 sm:leading-5 md:leading-6 mt-2">
               Driving
@@ -31,7 +31,7 @@ export default function About() {
             <p className="text-center font-normal text-normal text-base sm:text-xl md:text-2xl leading-4 sm:leading-5 md:leading-6 mt-4 px-4">Drive freely in our ready-to-go, well-maintained cars.</p>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] p-4 bg-panel rounded-t-lg">
+          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] p-4 bg-panel rounded-t-lg">
             <MdSecurity className="text-7xl sm:text-8xl md:text-9xl" />
             <h2 className="text-header text-center font-heading text-base sm:text-xl md:text-2xl font-semibold leading-4 sm:leading-5 md:leading-6 mt-2">
               Driver
@@ -41,7 +41,7 @@ export default function About() {
             <p className="text-center font-normal text-normal text-base sm:text-xl md:text-2xl leading-4 sm:leading-5 md:leading-6 mt-4 px-4">Drive freely in our ready-to-go, well-maintained cars.</p>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] p-4 bg-panel rounded-t-lg">
+          <div className="flex flex-col items-center justify-center w-[80vw] sm:w-[40vw] md:w-[30vw] lg:w-[20vw] px-4 py-12 bg-panel rounded-t-lg">
             <MdVerified className="text-7xl sm:text-8xl md:text-9xl" />
             <h2 className="text-header text-center font-heading text-base sm:text-xl md:text-2xl font-semibold leading-4 sm:leading-5 md:leading-6 mt-2">
               Safety &

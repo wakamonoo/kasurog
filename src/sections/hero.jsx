@@ -1,10 +1,18 @@
 "use client";
-import { FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaCar,
+  FaInfoCircle,
+  FaUserCircle,
+} from "react-icons/fa";
+import { RiLoginBoxLine } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
 import { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import CarHero from "../assets/heroCar.png";
 import GetStarted from "@/components/ctaOne";
 import SignUp from "@/components/signup";
+import Image from "next/image";
+import Bground from "@/assets/hero-bg.png"
 
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
@@ -66,44 +74,44 @@ export default function Hero() {
 
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-950">
+      <Image src={Bground} alt="bground" className="w-full h-screen absolute -z-20 object-cover" />
       <div
         className={`fixed p-4 text-highlight w-full text-2xl font-header z-50 ${
           isScrolled ? "backdrop-blur-xs" : "bg-transparent"
         }`}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center md:px-16 lg:px-32 xl:px-64">
           <a href="/">
-            <h1 className="font-medium">arqila.</h1>
+            <h1 className="font-medium text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
+              arqila.
+            </h1>
           </a>
           {hideMNav && (
             <div>
               <button onClick={() => setHideNav((prev) => !prev)}>
-                <FaBars className="duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
+                <FaBars className="text-label text-xl sm:text-2xl md:text-3xl duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
               </button>
             </div>
           )}
           {showPNav && (
-            <div className="flex gap-4 text-normal text-base sm:text-xl md:text-2xl font-normal">
+            <div className="flex gap-4 lg:gap-6 xl:gap-8 text-label text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
               <a href="">
-                <p>home</p>
+                <FaCar />
               </a>
               <a href="">
-                <p>cars</p>
+                <FaInfoCircle />
               </a>
               <a href="">
-                <p>about</p>
-              </a>
-              <a href="">
-                <p>contact</p>
+                <MdEmail />
               </a>
               <a
                 onClick={() => setShowSignUp((prev) => !prev)}
                 className="flex"
               >
-                <p>auth</p>
+                <RiLoginBoxLine />
               </a>
               <a href="/profile">
-                <p>profile</p>
+                <FaUserCircle />
               </a>
             </div>
           )}
@@ -121,10 +129,7 @@ export default function Hero() {
             <button onClick={() => setHideNav(false)}>
               <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
             </button>
-            <div className="flex flex-col p-4 gap-2 text-normal text-base sm:text-xl md:text-2xl font-normal z-[60]">
-              <a href="">
-                <p>home</p>
-              </a>
+            <div className="flex flex-col p-4 gap-2 text-label text-base sm:text-xl md:text-2xl font-normal z-[60]">
               <a href="">
                 <p>cars</p>
               </a>
@@ -148,27 +153,17 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="flex justify-center items-center min-h-screen px-8 sm:px-16 md:px-32 lg:px-40">
+      <div className="flex justify-center items-center min-h-screen px-8 sm:px-16 md:px-32 lg:px-64 xl:px-80">
         <div className="flex flex-col lg:flex-row items-center w-full">
-          <div className="p-2 mb-4 lg:w-1/2">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl text-header font-bold text-left leading-8 sm:leading-10 md:leading-12">
+          <div className="p-2 mb-4 space-y-6">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-header font-bold text-left leading-8 sm:leading-10 md:leading-12 lg:leading-15 xl:leading-19">
               modern renting, <br /> local trust
             </h1>
-            <p className="text-normal text-base sm:text-xl md:text-2xl font-normal leading-4.5 sm:leading-6 md:leading-7 lg:leading-8.5">
+            <p className="text-normal text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-normal leading-4.5 sm:leading-6 md:leading-7">
               from daily rides to long-term needs, arqila makes renting simple
               and reliable
             </p>
             <GetStarted />
-          </div>
-          <div className="relative flex justify-center items-center lg:w-1/2">
-            <div className="relative w-[80vw] sm:w-[60vw] md:w-[50vw] mx-auto">
-              <Image
-                src={CarHero}
-                alt="imageCar"
-                priority
-                className="object-contain w-full h-auto"
-              />
-            </div>
           </div>
         </div>
       </div>

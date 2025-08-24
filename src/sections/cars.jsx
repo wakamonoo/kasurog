@@ -2,7 +2,9 @@
 import Image from "next/image";
 import MessageOwner from "@/components/message";
 import { useEffect, useState } from "react";
-import { FaBoxOpen } from "react-icons/fa";
+import { FaBoxOpen, FaGasPump } from "react-icons/fa";
+import { GiGearStickPattern } from "react-icons/gi";
+import { MdAcUnit } from "react-icons/md";
 
 export default function Cars() {
   const [carInfo, setCarInfo] = useState([]);
@@ -45,9 +47,6 @@ export default function Cars() {
                 key={car.carid}
                 className="flex flex-col p-4 py-8 shadow-2xl rounded bg-panel relative w-[300px] sm:w-[350px] md:w-[270px] lg:w-[330px] h-auto"
               >
-                <p className="absolute bg-highlight px-6 p-2 text-base sm:text-xl md:text-2xl font-heading -skew-x-12 right-0 mt-1 shadow-2xl uppercase">
-                  {car.fuel}
-                </p>
                 <div>
                   <Image
                     src={car.image}
@@ -60,6 +59,28 @@ export default function Cars() {
                   <h2 className="text-header text-center font-heading text-base sm:text-xl md:text-2xl mt-4 font-semibold uppercase">
                     {car.car}
                   </h2>
+                  <div className="flex justify-center">
+                    <div className="text-2xl sm:text-3xl md:text-4xl flex flex-col items-left p-4 gap-2 text-header justify-center">
+                      <div className="flex items-center gap-2">
+                        <FaGasPump />
+                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
+                          {car.fuel}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <GiGearStickPattern />
+                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
+                          {car.transmission}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MdAcUnit />
+                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
+                          {car.aircon}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex flex-col">
@@ -74,10 +95,10 @@ export default function Cars() {
                       per day
                     </p>
                   </div>
-                  <div className="flex justify-center items-center gap-2 mt-4">
-                    <button className="px-4 py-2 rounded shadow-2xl bg-second">
+                  <div className="flex flex-col w-full justify-center items-center gap-4 mt-4">
+                    <button className="px-4 py-2 rounded shadow-2xl bg-second w-full duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer">
                       <p className="font-normal text-normal text-base sm:text-xl md:text-2xl">
-                        Details
+                        see full details
                       </p>
                     </button>
                     <MessageOwner />
