@@ -39,44 +39,44 @@ export default function Contact() {
   };
 
   return (
-    <div className="p-12 mt-16">
+    <div className="p-12 sm:px-24 md:px-32 lg:px-48 xl:px-64 mt-16">
       <div className="flex justify-center mb-16">
         <div className="flex flex-col leading-3">
-          <h1 className="text-4xl font-bold text-center">tell the dev</h1>
-          <p className="font-normal text-normal text-center">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-center leading-5 sm:leading-11 md:leading-17">tell the dev</h1>
+          <p className="text-normal text-base sm:text-xl md:text-2xl text-center font-normal">
             — your ideas, my code
           </p>
         </div>
       </div>
 
-      <form ref={contact} className="flex flex-col gap-2 justify-center">
+      <form ref={contact} className="flex flex-col gap-2 md:gap-4 justify-center">
         <input
           name="name"
-          className="bg-panel p-2 w-full h-auto rounded"
+          className="bg-panel p-2 w-full h-auto rounded text-normal text-base sm:text-xl md:text-2xl"
           type="text"
           placeholder="full name"
         />
         <input
           name="email"
-          className="bg-panel p-2 w-full h-auto rounded"
+          className="bg-panel p-2 w-full h-auto rounded text-normal text-base sm:text-xl md:text-2xl"
           type="text"
           placeholder="email address"
         />
         <input
           name="title"
-          className="bg-panel p-2 w-full h-auto rounded"
+          className="bg-panel p-2 w-full h-auto rounded text-normal text-base sm:text-xl md:text-2xl"
           type="text"
           placeholder="subject"
         />
         <textarea
           name="message"
-          className="bg-panel p-2 w-full h-[24vh] rounded"
+          className="bg-panel p-2 w-full h-[24vh] rounded text-normal text-base sm:text-xl md:text-2xl"
           type="text"
           placeholder="message"
         />
         <button
           onClick={sendEmail}
-          className="p-2 bg-highlight rounded text-normal font-normal"
+          className="p-2 bg-highlight rounded text-normal text-base sm:text-xl md:text-2xl text-center font-normal"
         >
           send email
         </button>
