@@ -19,16 +19,16 @@ export default function Cars() {
   return (
     <div className="p-12 mt-16">
       <div className="flex justify-center mb-16">
-        <div className="flex flex-col leading-3">
-          <h1 className="text-4xl font-bold text-center">the cars</h1>
-          <p className="font-normal text-normal text-center">
+        <div className="flex flex-col">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-center leading-3 sm:leading-6 md:leading-9">the cars</h1>
+          <p className="text-normal text-base sm:text-xl md:text-2xl font-normal">
             — find the right ride
           </p>
         </div>
       </div>
 
       {/* ———————————————————————————————————— cars card ——— */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-center sm:flex-row gap-4">
         {carInfo.length === 0 ? (
           <div className="flex flex-col justify-center items-center">
             <FaBoxOpen className="w-[32vw] h-auto" />
@@ -41,9 +41,9 @@ export default function Cars() {
             return (
               <div
                 key={car.carid}
-                className="flex flex-col p-4 shadow-2xl rounded bg-panel"
+                className="flex flex-col p-4 shadow-2xl rounded bg-panel relative w-[80vw] h-auto"
               >
-                <p className="absolute bg-highlight px-6 p-2 text-base font-heading -skew-x-12 right-10 mt-1 shadow-2xl uppercase">
+                <p className="absolute bg-highlight px-6 p-2 text-base font-heading -skew-x-12 right-0 mt-1 shadow-2xl uppercase">
                   {car.fuel}
                 </p>
                 <div>
