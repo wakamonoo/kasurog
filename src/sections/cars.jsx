@@ -32,7 +32,7 @@ export default function Cars() {
       </div>
 
       {/* ———————————————————————————————————— cars card ——— */}
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-6">
         {carInfo.length === 0 ? (
           <div className="flex flex-col justify-center items-center">
             <FaBoxOpen className="w-[32vw] h-auto" />
@@ -45,7 +45,7 @@ export default function Cars() {
             return (
               <div
                 key={car.carid}
-                className="flex flex-col p-4 py-8 shadow-2xl rounded bg-panel relative w-[300px] sm:w-[350px] md:w-[270px] lg:w-[330px] h-auto"
+                className="flex flex-col overflow-hidden shadow-2xl rounded bg-panel relative w-[300px] h-auto"
               >
                 <div>
                   <Image
@@ -54,53 +54,47 @@ export default function Cars() {
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className="w-full h-48 object-cover rounded"
+                    className="w-full h-48 object-cover"
                   />
-                  <h2 className="text-header text-center font-heading text-base sm:text-xl md:text-2xl mt-4 font-semibold uppercase">
+                </div>
+                <div className="py-4">
+                  <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase">
                     {car.car}
                   </h2>
-                  <div className="flex justify-center">
-                    <div className="text-2xl sm:text-3xl md:text-4xl flex flex-col items-left p-4 gap-2 text-header justify-center">
-                      <div className="flex items-center gap-2">
-                        <FaGasPump />
-                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
-                          {car.fuel}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <GiGearStickPattern />
-                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
-                          {car.transmission}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MdAcUnit />
-                        <p className="text-normal text-sm sm:text-base md:text-xl font-normal uppercase">
-                          {car.aircon}
-                        </p>
-                      </div>
+                  <div className="flex justify-center items-center gap-1">
+                    <h2 className="text-3xl sm:text-4xl font-header text-header font-extrabold">
+                      ₱{car.price}
+                    </h2>
+                    <div className="flex flex-col">
+                      <p className="text-sm sm:text-base md:text-xl font-normal leading-1 text-header">
+                        .00
+                      </p>
+                      <p className="text-sm sm:text-base md:text-xl font-normal text-header">
+                        Starting
+                      </p>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex flex-col">
-                  <div className="flex items-center justify-center gap-2">
-                    <p className="text-normal text-sm sm:text-base md:text-xl font-normal">
-                      starting at
-                    </p>
-                    <p className="text-normal text-sm sm:text-base md:text-xl">
-                      <span className="text-base sm:text-xl md:text-2xl font-semibold">
-                        {car.price}
-                      </span>{" "}
-                      per day
-                    </p>
-                  </div>
-                  <div className="flex flex-col w-full justify-center items-center gap-4 mt-4">
-                    <button className="px-4 py-2 rounded shadow-2xl bg-second w-full duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer">
-                      <p className="font-normal text-normal text-base sm:text-xl md:text-2xl">
-                        see full details
+                  <div className="flex gap-2 py-2 justify-center">
+                    <div className="flex justify-center items-center gap-1 text-xs sm:text-sm md:text-base">
+                      <FaGasPump />
+                      <p className="uppercase text-xs sm:text-sm md:text-base text-label">{car.fuel}</p>
+                    </div>
+                    <div className="flex justify-center items-center gap-1 text-xs sm:text-sm md:text-base">
+                      <GiGearStickPattern />
+                      <p className="uppercase text-xs sm:text-sm md:text-base text-label">
+                        {car.transmission}
                       </p>
-                    </button>
+                    </div>
+                    <div className="flex justify-center items-center gap-1 text-xs sm:text-sm md:text-base">
+                      <MdAcUnit />
+                      <p className="uppercase text-xs sm:text-sm md:text-base text-label">
+                        {car.aircon}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex w-full justify-center items-center mt-4">
                     <MessageOwner />
                   </div>
                 </div>
