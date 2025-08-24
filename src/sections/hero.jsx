@@ -83,7 +83,7 @@ export default function Hero() {
             </div>
           )}
           {showPNav && (
-            <div className="flex gap-4 text-normal font-normal text-base">
+            <div className="flex gap-4 text-normal text-base sm:text-xl md:text-2xl font-normal">
               <a href="">
                 <p>home</p>
               </a>
@@ -121,7 +121,7 @@ export default function Hero() {
             <button onClick={() => setHideNav(false)}>
               <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
             </button>
-            <div className="flex flex-col p-4 gap-2 font-normal text-normal text-base z-[60]">
+            <div className="flex flex-col p-4 gap-2 text-normal text-base sm:text-xl md:text-2xl font-normal z-[60]">
               <a href="">
                 <p>home</p>
               </a>
@@ -148,26 +148,28 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="flex justify-center pt-32 px-8 sm:px-16 md:px-32">
-        <div className="flex flex-col">
-          <div className="p-2 mb-4">
-            <h1 className="text-4xl text-header font-bold text-left leading-8">
+      <div className="flex justify-center items-center min-h-screen px-8 sm:px-16 md:px-32 lg:px-40">
+        <div className="flex flex-col lg:flex-row items-center w-full">
+          <div className="p-2 mb-4 lg:w-1/2">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl text-header font-bold text-left leading-8 sm:leading-10 md:leading-12">
               modern renting, <br /> local trust
             </h1>
-            <p className="text-base leading-4">
+            <p className="text-normal text-base sm:text-xl md:text-2xl font-normal leading-4.5 sm:leading-6 md:leading-7 lg:leading-8.5">
               from daily rides to long-term needs, arqila makes renting simple
               and reliable
             </p>
             <GetStarted />
           </div>
-          <div className="absolute top-32 -z-10 right-2 bg-panel w-[80vw] sm:w-[70vw] md:w-[60vw] h-[80vw] sm:h-[70vw] md:h-[60vw] rounded-full" />
-          <Image
-            src={CarHero}
-            alt="imageCar"
-            priority="true"
-            className="object-contain w-full max-h-screen"
-            style={{ height: "auto" }}
-          />
+          <div className="relative flex justify-center items-center lg:w-1/2">
+            <div className="relative w-[80vw] sm:w-[60vw] md:w-[50vw] mx-auto">
+              <Image
+                src={CarHero}
+                alt="imageCar"
+                priority
+                className="object-contain w-full h-auto"
+              />
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,7 +1,7 @@
 export default function GetStarted() {
   return(
     <div className="py-2 px-4 bg-highlight w-fit mt-2 rounded duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer">
-      <p className="text-base font-normal text-normal">get started</p>
+      <p className="text-normal text-base sm:text-xl md:text-2xl font-normal ">GET STARTED</p>
     </div>
   );
 }
