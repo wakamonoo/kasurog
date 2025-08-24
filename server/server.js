@@ -9,21 +9,26 @@ import imageRoute from "./routes/imageRoute.js";
 
 dotenv.config();
 
-const allowedOrigins = ["http://localhost:3000", "https://arqila-wakamonoo.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://arqila-wakamonoo.vercel.app",
+];
 const app = express();
 
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, Postman)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true, // allow cookies/auth headers if needed
-}));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
