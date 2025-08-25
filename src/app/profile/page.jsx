@@ -6,6 +6,7 @@ import { FaArrowLeft, FaUserAltSlash, FaCar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose } from "react-icons/md";
+import Fallback from "@/assets/user.png"; 
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -199,95 +200,101 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-12 sm:px-24 md:px-32 lg:px-48 xl:px-64 ">
       <a href="/">
-        <FaArrowLeft />
+        <FaArrowLeft className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
       </a>
 
       {loading ? (
-        <div className="flex justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-4">
+        <div className="flex justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full p-24 sm:px-32 md:px-48 lg:px-64 xl:px-82">
           <Loader />
         </div>
       ) : user ? (
         <div>
           <div className="flex flex-col justify-center items-center gap-2 mt-8">
             <img
-              src={fbAuth.photoURL}
-              className="w-24 rounded-full"
+              src={fbAuth.photoURL || Fallback}
+              className="w-32 sm:w-40 md:w-50 rounded-full"
               alt="user"
             />
-            <p className="text-header font-normal">{fbAuth.displayName}</p>
+            <p className="text-header text-xl sm:text-2xl md:text-3xl font-extrabold text-center uppercase">
+              {fbAuth.displayName}
+            </p>
           </div>
           <div className="flex justify-center">
             <button
               onClick={() => setDriverApp(true)}
-              className="flex items-center justify-center gap-2 bg-highlight p-2 px-4 w-fill rounded mt-2"
+              className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fill rounded-full mt-2"
             >
-              <p>driverpreneur sign-up</p>
-              <FaCar />
+              <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+                <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                  driverpreneur sign-up
+                </p>
+              </div>
             </button>
           </div>
 
-          <div className="flex justify-center items-center gap-8 mt-8">
+          <div className="flex justify-center items-center gap-24 sm:gap-30 md:gap-36 mt-8">
             <button
               onClick={() => {
                 setShowDiver(false), setShowInfo(true);
               }}
-              className={`pb-2 ${
+              className={`pb-2 cursor-pointer ${
                 showInfo
                   ? "border-b-2 border-[var(--color-highlight)]"
                   : "border-none"
               }`}
             >
-              <p className="text-normal font-normal">Personal Info</p>
+              <p className={`${showInfo ? "text-header" : "text-normal" } text-base sm:text-xl md:text-2xl font-semibold`}>Personal Info</p>
             </button>
             <button
               onClick={() => {
                 setShowDiver(true), setShowInfo(false);
               }}
-              className={`pb-2 ${
+              className={`pb-2 cursor-pointer ${
                 showDriver
                   ? "border-b-2 border-[var(--color-highlight)]"
                   : "border-none"
               }`}
             >
-              <p className="text-normal font-normal">Driver Page</p>
+              <p className={`${showDriver ? "text-header" : "text-normal" } text-base sm:text-xl md:text-2xl font-semibold`}>Driver Page</p>
             </button>
           </div>
 
           {showInfo && (
-            <div className="flex justify-center items-center flex-col gap-2 p-4">
-              <div>
-                <p className="text-header font-heading">
+            <div className="flex justify-left items-center flex-col gap-2 p-4 mt-2">
+              <div className="flex flex-col gap-2 sm:gap-4 md:gap-6">
+                <p className="text-header font-heading text-base sm:text-xl md:text-2xl leading-6 sm:leading-8 md:leading-10">
                   Full Name:
                   <br />
-                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)] text-base sm:text-xl md:text-2xl">
                     {user.name}
                   </span>
                 </p>
-                <p className="text-header font-heading">
+                <p className="text-header font-heading text-base sm:text-xl md:text-2xl leading-6 sm:leading-8 md:leading-10">
                   Email:
                   <br />
-                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)]">
+                  <span className="font-normal text-normal border-l-2 px-2 border-[var(--color-highlight)] text-base sm:text-xl md:text-2xl">
                     {user.email}
                   </span>
                 </p>
-                <p className="text-header font-heading">
+                <p className="text-header font-heading text-base sm:text-xl md:text-2xl leading-6 sm:leading-8 md:leading-10">
                   Contact:
                   <br />
                   <span
-                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
+                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] text-base sm:text-xl md:text-2xl ${
                       !user.contact ? "italic text-gray-500" : "text-normal"
                     }`}
                   >
                     {user.contact || "contact not yet added"}
                   </span>
                 </p>
-                <p className="text-header font-heading">
+                <p className="text-header font-heading text-base sm:text-xl md:text-2xl leading-6 sm:leading-8 md:leading-10">
                   Address:
                   <br />
                   <span
-                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] ${
+                    className={`font-normal border-l-2 px-2 border-[var(--color-highlight)] text-base sm:text-xl md:text-2xl ${
                       !user.address ? "italic text-gray-500" : "text-normal"
                     }`}
                   >
@@ -296,20 +303,20 @@ export default function Profile() {
                 </p>
                 <button
                   onClick={() => setEdit(true)}
-                  className="flex mt-4 p-4 bg-highlight rounded w-fit"
+                  className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
                 >
-                  <p>edit information</p>
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">edit information</p>
                 </button>
               </div>
             </div>
           )}
           {showDriver && (
-            <div className="flex flex-col justify-center items-center mt-8">
+            <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
               <button
                 onClick={() => setAddCar(true)}
-                className="flex mt-4 p-4 bg-highlight rounded w-fit"
+                className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
               >
-                list a car
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">list a car</p>
               </button>
             </div>
           )}
@@ -331,11 +338,11 @@ export default function Profile() {
         <div className="fixed inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
           <div
             ref={divRef}
-            className="flex absolute justify-center items center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-panel p-4"
+            className="flex relative justify-center bg-panel p-4 w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
           >
-            <div className="">
+            <button className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
               <MdClose onClick={() => setEdit(false)} />
-            </div>
+            </button>
             <div className="mt-8 flex flex-col gap-2">
               <input
                 type="text"

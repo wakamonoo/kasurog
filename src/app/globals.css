@@ -87,6 +87,10 @@
     color: var(--color-panel);
   }
 
+  .text-second {
+    color: var(--color-secondary);
+  }
+
   .text-label {
     color: var(--color-label);
   }

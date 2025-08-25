@@ -1,4 +1,10 @@
-import { Poppins, Inter, Rubik, Montserrat, Bebas_Neue } from "next/font/google";
+import {
+  Poppins,
+  Inter,
+  Rubik,
+  Montserrat,
+  Bebas_Neue,
+} from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -44,12 +50,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${poppins.variable} ${inter.variable} ${rubik.variable} ${montserrat.variable} ${bebasNeue.variable}`}
-      >
-        {children}
-      </body>
+    <html
+      lang="en"
+      className={`${poppins.variable} ${inter.variable} ${rubik.variable} ${montserrat.variable} ${bebasNeue.variable} scroll-smooth`}
+    >
+      <body>{children}</body>
     </html>
   );
 }

@@ -1,7 +1,7 @@
 export default function MessageOwner() {
   return (
-    <div className="flex py-3 justify-center items-center px-4 bg-highlight gap-2 rounded-full duration-150 hover:scale-105 hover:bg-highlight-hover active:scale-105 active:bg-highlight-hover cursor-pointer">
-      <p className="font-normal text-normal text-base sm:text-xl md:text-2xl">
+    <div className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 rounded-full w-fit">
+      <p className="text-normal text-second duration-200 group-hover:text-[var(--color-highlight)] sm:text-xl md:text-2xl font-normal">
         Chat Driverpreneur
       </p>
     </div>

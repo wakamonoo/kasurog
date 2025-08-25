@@ -25,7 +25,7 @@ export default function Contact() {
         contact.current.reset();
       },
       (error) => {
-         Swal.fire({
+        Swal.fire({
           title: "Error!",
           text: "Message Not Sent",
           icon: "Warning",
@@ -42,14 +42,19 @@ export default function Contact() {
     <div className="p-12 sm:px-24 md:px-32 lg:px-48 xl:px-64 mt-16">
       <div className="flex justify-center mb-16">
         <div className="flex flex-col leading-3">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-center leading-5 sm:leading-11 md:leading-17">tell the dev</h1>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-center leading-5 sm:leading-11 md:leading-17">
+            tell the dev
+          </h1>
           <p className="text-normal text-base sm:text-xl md:text-2xl text-center font-normal">
             — your ideas, my code
           </p>
         </div>
       </div>
 
-      <form ref={contact} className="flex flex-col gap-2 md:gap-4 justify-center">
+      <form
+        ref={contact}
+        className="flex flex-col gap-2 md:gap-4 justify-center"
+      >
         <input
           name="name"
           className="bg-panel p-2 w-full h-auto rounded text-normal text-base sm:text-xl md:text-2xl"
@@ -76,7 +81,7 @@ export default function Contact() {
         />
         <button
           onClick={sendEmail}
-          className="p-2 bg-highlight rounded text-normal text-base sm:text-xl md:text-2xl text-center font-normal"
+          className="p-2 duration-200 cursor-pointer hover:bg-[var(--color-secondary)] bg-highlight rounded text-second  hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl text-center font-normal"
         >
           send email
         </button>

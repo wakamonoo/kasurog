@@ -2,12 +2,18 @@
 import { auth } from "@/firebase/firebaseConfig";
 import { googleSignUp } from "@/firebase/firebaseConfig";
 import { useEffect, useRef, useState } from "react";
-import { FaGoogle } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
-import { MdClose } from "react-icons/md";
-import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
-const BASE_URL = process.env.NODE_ENV === "production" ? "https://arqila.onrender.com" : "http://localhost:4000";
+import { MdClose, MdPersonAdd } from "react-icons/md";
+import Swal from "sweetalert2";
+import Logo from "@/assets/logo.png";
+import Image from "next/image";
+
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://arqila.onrender.com"
+    : "http://localhost:4000";
 
 export default function SignUp({ onClose }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
@@ -94,24 +100,34 @@ export default function SignUp({ onClose }) {
   };
 
   return (
-    <div ref={divRef} className="flex bg-panel p-4 w-fill rounded-2xl">
-      <button onClick={onClose} className="flex">
+    <div
+      ref={divRef}
+      className="flex relative justify-center bg-panel p-4 w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
+    >
+      <button onClick={onClose} className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
         <MdClose />
       </button>
-      <div className="p-4 mt-4 flex flex-col gap-4 justify-center items-center">
+      <div className="p-4 mt-4 flex flex-col justify-center items-center">
+        <Image src={Logo} alt="logo" className="w-32 sm:w-40 md:w-48 h-auto" />
+        <div className="flex flex-col items-center justify-center">
+          <h4 className="text-normal text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold leading-3 sm:leading-3.5 md:leading-4">
+            vroom now!
+          </h4>
+          <p className="text-sm sm:text-base md:text-xl text-label">your ride starts here!</p>
+        </div>
         <button
           onClick={handleSignIn}
-          className="bg-highlight p-2 px-4 w-full rounded-2xl"
+          className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-12"
         >
           {isLoggedIn ? (
-            <div className="flex items-center justify-center gap-2">
-              <p>log-out account</p>
-              <FiLogOut />
+            <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+              <RiLogoutCircleRLine className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">log-out your account</p>
             </div>
           ) : (
-            <div className="flex items-center justify-center gap-2">
-              <p>sign in with google</p>
-              <FaGoogle />
+            <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+              <FcGoogle />
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">sign in with google</p>
             </div>
           )}
         </button>

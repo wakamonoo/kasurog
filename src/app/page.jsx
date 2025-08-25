@@ -6,14 +6,21 @@ import Contact from "@/sections/contact";
 export default function Home() {
   return (
     <>
-      <Hero />
+      <section id="hero">
+        <Hero />
+      </section>
 
-      <Cars />
+      <section id="cars">
+        <Cars />
+      </section>
 
-      <About />
+      <section id="about">
+        <About />
+      </section>
 
-      <Contact />
-      
+      <section id="contact">
+        <Contact />
+      </section>
     </>
   );
 }

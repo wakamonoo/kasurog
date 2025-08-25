@@ -13,6 +13,7 @@ import GetStarted from "@/components/ctaOne";
 import SignUp from "@/components/signup";
 import Image from "next/image";
 import Bground from "@/assets/hero-bg.png"
+import Logo from "@/assets/logo.png"
 
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
@@ -81,10 +82,8 @@ export default function Hero() {
         }`}
       >
         <div className="flex justify-between items-center md:px-16 lg:px-32 xl:px-64">
-          <a href="/">
-            <h1 className="font-medium text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl">
-              arqila.
-            </h1>
+          <a href="#hero">
+            <Image src={Logo} alt="logo" className="w-24 sm:w-28 md:w-32 h-auto" />
           </a>
           {hideMNav && (
             <div>
@@ -94,14 +93,14 @@ export default function Hero() {
             </div>
           )}
           {showPNav && (
-            <div className="flex gap-4 lg:gap-6 xl:gap-8 text-label text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
-              <a href="">
+            <div className="flex gap-4 cursor-pointer lg:gap-6 xl:gap-8 text-label text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
+              <a href="#cars">
                 <FaCar />
               </a>
-              <a href="">
+              <a href="#about">
                 <FaInfoCircle />
               </a>
-              <a href="">
+              <a href="#contact">
                 <MdEmail />
               </a>
               <a
