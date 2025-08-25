@@ -6,7 +6,7 @@ import { FaArrowLeft, FaUserAltSlash, FaCar } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose } from "react-icons/md";
-import Fallback from "@/assets/user.png"; 
+import Fallback from "@/assets/user.png";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -246,7 +246,13 @@ export default function Profile() {
                   : "border-none"
               }`}
             >
-              <p className={`${showInfo ? "text-header" : "text-normal" } text-base sm:text-xl md:text-2xl font-semibold`}>Personal Info</p>
+              <p
+                className={`${
+                  showInfo ? "text-header" : "text-normal"
+                } text-base sm:text-xl md:text-2xl font-semibold`}
+              >
+                Personal Info
+              </p>
             </button>
             <button
               onClick={() => {
@@ -258,7 +264,13 @@ export default function Profile() {
                   : "border-none"
               }`}
             >
-              <p className={`${showDriver ? "text-header" : "text-normal" } text-base sm:text-xl md:text-2xl font-semibold`}>Driver Page</p>
+              <p
+                className={`${
+                  showDriver ? "text-header" : "text-normal"
+                } text-base sm:text-xl md:text-2xl font-semibold`}
+              >
+                Driver Page
+              </p>
             </button>
           </div>
 
@@ -305,7 +317,9 @@ export default function Profile() {
                   onClick={() => setEdit(true)}
                   className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
                 >
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">edit information</p>
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                    edit information
+                  </p>
                 </button>
               </div>
             </div>
@@ -316,7 +330,9 @@ export default function Profile() {
                 onClick={() => setAddCar(true)}
                 className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
               >
-                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">list a car</p>
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                  list a car
+                </p>
               </button>
             </div>
           )}
@@ -338,19 +354,19 @@ export default function Profile() {
         <div className="fixed inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
           <div
             ref={divRef}
-            className="flex relative justify-center bg-panel p-4 w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
+            className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl overflow-hidden p-6"
           >
-            <button className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
+            <button className="absolute cursor-pointer right-4 top-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
               <MdClose onClick={() => setEdit(false)} />
             </button>
-            <div className="mt-8 flex flex-col gap-2">
+            <div className="mt-[6vh] flex flex-col h-[calc(100%-6vh-2rem)] gap-4 overflow-y-auto pr-2">
               <input
                 type="text"
                 placeholder="Full Name"
                 name="name"
                 value={form.name}
                 onChange={handleInputChange}
-                className="rounded bg-second font-normal text-sm w-[80vw] p-2"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-full p-3"
               />
               <input
                 type="text"
@@ -358,7 +374,7 @@ export default function Profile() {
                 name="contact"
                 value={form.contact}
                 onChange={handleInputChange}
-                className="rounded  bg-second font-normal text-sm w-[80vw] p-2"
+                className="rounded  bg-second font-normal text-base sm:text-xl md:text-2xl w-full p-3"
               />
               <input
                 type="text"
@@ -366,13 +382,15 @@ export default function Profile() {
                 name="address"
                 value={form.address}
                 onChange={handleInputChange}
-                className="rounded  bg-second font-normal text-sm w-[80vw] p-2"
+                className="rounded  bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <button
                 onClick={handleSubmit}
-                className="text-normal font-normal bg-highlight p-2 rounded"
+                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
               >
-                submit
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                  Submit Changes
+                </p>
               </button>
             </div>
           </div>
@@ -381,19 +399,19 @@ export default function Profile() {
 
       {addCar && (
         <div className="fixed w-full inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
-          <div className="flex flex-col p-4 bg-panel justify-center items-center gap-4 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-[90vw] max-w-md max-h-[80vh]">
+          <div className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6">
             <MdClose
               onClick={() => setAddCar(false)}
-              className="absolute top-2 left-4"
+              className="absolute cursor-pointer right-4 top-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110"
             />
-            <div className="flex flex-col gap-4 mt-8 overflow-y-auto pr-2">
-              <input
+            <div className="mt-[6vh] flex flex-col h-[calc(100%-6vh-2rem)] gap-4 overflow-y-auto pr-2">
+              <input 
                 type="text"
                 placeholder="car model"
                 name="car"
                 value={carForm.car}
                 onChange={handleCarInput}
-                className="bg-second p-2 rounded"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <input
                 type="text"
@@ -401,7 +419,7 @@ export default function Profile() {
                 name="year"
                 value={carForm.year}
                 onChange={handleCarInput}
-                className="bg-second p-2 rounded"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <input
                 type="text"
@@ -409,7 +427,7 @@ export default function Profile() {
                 name="seat"
                 value={carForm.seat}
                 onChange={handleCarInput}
-                className="bg-second p-2 rounded"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <input
                 type="text"
@@ -417,13 +435,13 @@ export default function Profile() {
                 name="price"
                 value={carForm.price}
                 onChange={handleCarInput}
-                className="bg-second p-2 rounded"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <select
                 name="fuel"
                 onChange={handleCarInput}
                 value={carForm.fuel}
-                className="bg-second p-2 rounded text-gray-500"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="null">select fuel type</option>
                 <option value="diesel">diesel</option>
@@ -433,7 +451,7 @@ export default function Profile() {
                 name="transmission"
                 onChange={handleCarInput}
                 value={carForm.transmission}
-                className="bg-second p-2 rounded text-gray-500"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="null">select transmission type</option>
                 <option value="Manual">Manual</option>
@@ -443,13 +461,13 @@ export default function Profile() {
                 name="aircon"
                 onChange={handleCarInput}
                 value={carForm.aircon}
-                className="bg-second p-2 rounded text-gray-500"
+                className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="">air conditioning available?</option>
                 <option value="yes">yes</option>
                 <option value="no">no</option>
               </select>
-              <label className="text-gray-500 font-normal text-base">
+              <label className="text-gray-500 font-normal text-base sm:text-xl md:text-2xl">
                 upload car image:
               </label>
               <input
@@ -457,13 +475,15 @@ export default function Profile() {
                 onChange={(e) =>
                   setCarForm({ ...carForm, image: e.target.files[0] })
                 }
-                className="w-[70vw] bg-second p-2 rounded text-gray-500"
+                className="bg-second p-2 rounded text-gray-500"
               />
               <button
                 onClick={handleCarSubmit}
-                className="text-normal font-normal bg-highlight p-2 rounded"
+                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
               >
-                add car
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                  Add Car
+                </p>
               </button>
             </div>
           </div>

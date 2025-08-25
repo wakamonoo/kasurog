@@ -102,9 +102,9 @@ export default function SignUp({ onClose }) {
   return (
     <div
       ref={divRef}
-      className="flex relative justify-center bg-panel p-4 w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
+      className="flex relative justify-center bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
     >
-      <button onClick={onClose} className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
+      <button onClick={onClose} className="absolute cursor-pointer top-4 right-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
         <MdClose />
       </button>
       <div className="p-4 mt-4 flex flex-col justify-center items-center">
