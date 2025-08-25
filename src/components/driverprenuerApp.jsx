@@ -18,29 +18,28 @@ export default function DriverApp({ onExit }) {
   return (
     <div
       ref={divRef}
-      className="bg-panel w-fill p-4 flex justify-center absolute rounded shadow-2xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+      className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6"
     >
-      <div className="absolute top-4 left-4">
+      <div className="absolute cursor-pointer top-4 right-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
         <button onClick={onExit}>
           <MdClose />
         </button>
       </div>
-      <div className="flex flex-col justify-center gap-4 mt-8">
-        <div>
-          <p className="">kindly upload your driver's license:</p>
-          <input
-            type="file"
-            className="bg-second font-normal text-sm w-[80vw] p-2 rounded "
-          />
-        </div>
-        <div>
-          <p>kindly upload your vehicle's or/cr:</p>
-          <input
-            type="file"
-            className="bg-second font-normal text-sm w-[80vw] p-2 rounded "
-          />
-        </div>
-        
+      <div className="mt-[6vh] flex flex-col h-[calc(100%-6vh-2rem)] gap-4 overflow-y-auto pr-2">
+        <label className="text-gray-500 font-normal text-base sm:text-xl md:text-2xl">
+          Upload OR/CR:
+        </label>
+        <input
+          type="file"
+          className="bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 rounded text-gray-500"
+        />
+        <label className="text-gray-500 font-normal text-base sm:text-xl md:text-2xl">
+          Upload Driver's License:
+        </label>
+        <input
+          type="file"
+          className="bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 rounded text-gray-500"
+        />
       </div>
     </div>
   );

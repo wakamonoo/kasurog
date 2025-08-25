@@ -19,6 +19,7 @@ export default function Profile() {
   const [showDriver, setShowDiver] = useState(false);
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
+  const ListRef = useRef();
   const [form, setForm] = useState({ name: "", contact: "", address: "" });
   const [carForm, setCarForm] = useState({
     car: "",
@@ -70,6 +71,19 @@ export default function Profile() {
     document.addEventListener("mousedown", handleEdit);
     return () => {
       document.removeEventListener("mousedown", handleEdit);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleAdd(e) {
+      if (ListRef.current && !ListRef.current.contains(e.target)) {
+        setAddCar(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleAdd);
+    return () => {
+      document.removeEventListener("mousedown", handleAdd);
     };
   }, []);
 
@@ -399,13 +413,13 @@ export default function Profile() {
 
       {addCar && (
         <div className="fixed w-full inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
-          <div className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6">
+          <div ref={ListRef} className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6">
             <MdClose
               onClick={() => setAddCar(false)}
               className="absolute cursor-pointer right-4 top-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110"
             />
             <div className="mt-[6vh] flex flex-col h-[calc(100%-6vh-2rem)] gap-4 overflow-y-auto pr-2">
-              <input 
+              <input
                 type="text"
                 placeholder="car model"
                 name="car"
@@ -468,14 +482,14 @@ export default function Profile() {
                 <option value="no">no</option>
               </select>
               <label className="text-gray-500 font-normal text-base sm:text-xl md:text-2xl">
-                upload car image:
+                Upload Car Image:
               </label>
               <input
                 type="file"
                 onChange={(e) =>
                   setCarForm({ ...carForm, image: e.target.files[0] })
                 }
-                className="bg-second p-2 rounded text-gray-500"
+                className="bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 rounded text-gray-500"
               />
               <button
                 onClick={handleCarSubmit}
