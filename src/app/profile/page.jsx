@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose } from "react-icons/md";
 
-const BASE_URL = process.env.NODE_ENV === "production" ? "https://arqila.onrender.com" : "http://localhost:4000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default function Profile() {
   const [fbAuth, setFbAuth] = useState(null);
