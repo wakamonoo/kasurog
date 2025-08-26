@@ -37,8 +37,8 @@ export default function Cars() {
       <div className="flex flex-wrap justify-center gap-6">
         {carInfo.length === 0 ? (
           <div className="flex flex-col justify-center items-center">
-            <FaBoxOpen className="w-[32vw] h-auto" />
-            <p className="text-sm text-label font-normal">
+            <FaBoxOpen className="w-[32vw] sm:w-[24vw] md:w-[16vw] h-auto" />
+            <p className="text-sm sm:text-base md:text-xl text-label font-normal">
               nothing to display yet
             </p>
           </div>

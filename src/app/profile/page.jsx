@@ -132,7 +132,7 @@ export default function Profile() {
       if (res.ok) {
         Swal.fire({
           title: "Success",
-          text: "Profile Updated",
+          text: "Car Listing Added",
           icon: "success",
           timer: 2000,
           showConfirmButton: false,
@@ -150,7 +150,7 @@ export default function Profile() {
       } else {
         Swal.fire({
           title: "Error",
-          text: data.error || "Updated Failed",
+          text: data.error || "Updload Failed",
           icon: "error",
           timer: 2000,
           showConfirmButton: false,
@@ -413,7 +413,10 @@ export default function Profile() {
 
       {addCar && (
         <div className="fixed w-full inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
-          <div ref={ListRef} className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6">
+          <div
+            ref={ListRef}
+            className="relative bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[400px] sm:h-[450px] md:h-[500px] rounded-2xl p-6"
+          >
             <MdClose
               onClick={() => setAddCar(false)}
               className="absolute cursor-pointer right-4 top-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110"
