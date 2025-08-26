@@ -240,7 +240,7 @@ export default function Profile() {
               onClick={() => setDriverApp(true)}
               className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fill rounded-full mt-2"
             >
-              <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+              <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
                 <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
                 <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
                   driverpreneur sign-up
@@ -331,7 +331,7 @@ export default function Profile() {
                   onClick={() => setEdit(true)}
                   className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
                 >
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] ttext-base sm:text-xl md:text-2xl font-normal">
                     edit information
                   </p>
                 </button>
@@ -344,7 +344,7 @@ export default function Profile() {
                 onClick={() => setAddCar(true)}
                 className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
               >
-                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl font-normal">
                   list a car
                 </p>
               </button>
