@@ -12,8 +12,8 @@ import { useRef, useState, useEffect } from "react";
 import GetStarted from "@/components/ctaOne";
 import SignUp from "@/components/signup";
 import Image from "next/image";
-import Bground from "@/assets/hero-bg.png"
-import Logo from "@/assets/logo.png"
+import Bground from "@/assets/hero-bg.png";
+import Logo from "@/assets/logo.png";
 
 export default function Hero() {
   const [hideNav, setHideNav] = useState(false);
@@ -75,7 +75,11 @@ export default function Hero() {
 
   return (
     <div className="h-screen bg-gradient-to-b from-indigo-950">
-      <Image src={Bground} alt="bground" className="w-full h-screen absolute -z-20 object-cover" />
+      <Image
+        src={Bground}
+        alt="bground"
+        className="w-full h-screen absolute -z-20 object-cover"
+      />
       <div
         className={`fixed py-2 px-4 text-highlight w-full text-2xl font-header z-50 ${
           isScrolled ? "backdrop-blur-xs" : "bg-transparent"
@@ -83,7 +87,11 @@ export default function Hero() {
       >
         <div className="flex justify-between items-center md:px-16 lg:px-32 xl:px-64">
           <a href="#hero">
-            <Image src={Logo} alt="logo" className="w-24 sm:w-28 md:w-32 h-auto" />
+            <Image
+              src={Logo}
+              alt="logo"
+              className="w-24 sm:w-28 md:w-32 h-auto"
+            />
           </a>
           {hideMNav && (
             <div>
@@ -93,25 +101,54 @@ export default function Hero() {
             </div>
           )}
           {showPNav && (
-            <div className="flex gap-4 cursor-pointer lg:gap-6 xl:gap-8 text-label text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
-              <a href="#cars">
-                <FaCar />
-              </a>
-              <a href="#about">
-                <FaInfoCircle />
-              </a>
-              <a href="#contact">
-                <MdEmail />
-              </a>
-              <a
-                onClick={() => setShowSignUp((prev) => !prev)}
-                className="flex"
-              >
-                <RiLoginBoxLine />
-              </a>
-              <a href="/profile">
-                <FaUserCircle />
-              </a>
+            <div className="flex gap-4 cursor-pointer lg:gap-6 xl:gap-8 text-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
+
+              <div className="flex items-center justify-center group">
+                <a href="#cars" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                  <FaCar />
+                </a>
+                <a href="#cars" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">cars</span>
+                </a>
+              </div>
+
+              <div className="flex items-center justify-center group">
+                <a href="#about" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                  <FaInfoCircle />
+                </a>
+                <a href="#about" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">about</span>
+                </a>
+              </div>
+
+              <div className="flex items-center justify-center group">
+                <a href="#contact" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                  <MdEmail />
+                </a>
+                <a href="#contact" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">contact</span>
+                </a>
+              </div>
+
+              <div className="flex items-center justify-center group">
+                <a onClick={() => setShowSignUp(true)} className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                  <RiLoginBoxLine />
+                </a>
+                <a onClick={() => setShowSignUp((prev) => !prev)} className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">auth</span>
+                </a>
+              </div>
+
+
+              <div className="flex items-center justify-center group">
+                <a href="/profile" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                  <FaUserCircle />
+                </a>
+                <a href="/profile" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">profile</span>
+                </a>
+              </div>
+
             </div>
           )}
         </div>
@@ -139,7 +176,7 @@ export default function Hero() {
                 <p>contact</p>
               </a>
               <a
-                onClick={() => setShowSignUp((prev) => !prev)}
+                onClick={() => setShowSignUp(true)}
                 className="flex"
               >
                 <p>auth</p>
