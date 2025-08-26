@@ -77,7 +77,7 @@ export default function Hero() {
     <div className="h-screen bg-gradient-to-b from-indigo-950">
       <Image src={Bground} alt="bground" className="w-full h-screen absolute -z-20 object-cover" />
       <div
-        className={`fixed p-4 text-highlight w-full text-2xl font-header z-50 ${
+        className={`fixed py-2 px-4 text-highlight w-full text-2xl font-header z-50 ${
           isScrolled ? "backdrop-blur-xs" : "bg-transparent"
         }`}
       >
