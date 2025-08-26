@@ -60,7 +60,7 @@ export default function Cars() {
                   />
                 </div>
                 <div className="py-4">
-                  <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase">
+                  <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase line-clamp-2 h-[64px]">
                     {car.car}
                   </h2>
                   <div className="flex justify-center items-center gap-0.5 p-4">

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose } from "react-icons/md";
 import Fallback from "@/assets/user.png";
+import CarListing from "@/components/carListing";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -31,6 +32,7 @@ export default function Profile() {
     aircon: "",
     image: null,
   });
+  const [carList, setCarList] = useState([]);
   const [addCar, setAddCar] = useState(false);
 
   useEffect(() => {
@@ -52,6 +54,16 @@ export default function Profile() {
         }
       } else {
         setUser(null);
+      }
+      if (logged) {
+        try {
+          const res = await fetch(`${BASE_URL}/api/cars/carsList/${logged.uid}`);
+          const dbCars = await res.json();
+
+          setCarList(dbCars);
+        } catch (err) {
+          console.error("failed to fetch carlist:", err)
+        }
       }
       setLoading(false);
     });
@@ -214,9 +226,9 @@ export default function Profile() {
   };
 
   return (
-    <div className="p-12 sm:px-24 md:px-32 lg:px-48 xl:px-64 ">
+    <div className="py-12 sm:px-24 md:px-32 lg:px-48 xl:px-64 ">
       <a href="/">
-        <FaArrowLeft className="absolute cursor-pointer left-12 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
+        <FaArrowLeft className="absolute cursor-pointer left-[6vw] text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
       </a>
 
       {loading ? (
@@ -340,6 +352,7 @@ export default function Profile() {
           )}
           {showDriver && (
             <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
+              <CarListing carList={carList} />
               <button
                 onClick={() => setAddCar(true)}
                 className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
