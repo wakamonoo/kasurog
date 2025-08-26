@@ -163,16 +163,16 @@ export default function Hero() {
             className="h-screen shadow-2xl fixed z-50 top-0 right-0 w-[60vw] bg-panel p-4"
           >
             <button onClick={() => setHideNav(false)}>
-              <FaTimes className="text-xl text-header duration-200 hover:scale-110 active:scale-110 cursor-pointer" />
+              <FaTimes className="cursor-pointer top-4 right-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
             </button>
-            <div className="flex flex-col p-4 gap-2 text-label text-base sm:text-xl md:text-2xl font-normal z-[60]">
-              <a href="">
+            <div className="flex flex-col p-4 gap-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal z-[60] cursor-pointer">
+              <a href="#cars">
                 <p>cars</p>
               </a>
-              <a href="">
+              <a href="#about">
                 <p>about</p>
               </a>
-              <a href="">
+              <a href="#contact">
                 <p>contact</p>
               </a>
               <a
