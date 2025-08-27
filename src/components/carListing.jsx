@@ -1,11 +1,15 @@
 "use client";
-
-import { useState } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 
-export default function CarListing({ carList }) {
-  const [editCar, setEditCar] = useState(false);
+export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, editCar, setEditCar }) {
+ 
+
+  const handleCarEditChange = (e) => {
+  setCarVal((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+};
+
+  
 
   return (
     <div>
@@ -22,7 +26,7 @@ export default function CarListing({ carList }) {
                   </h2>
                   <div className="flex gap-2">
                     <div className="flex text-center items-center justify-center cursor-pointer text-xl bg-highlight duration-200 hover:bg-[var(--color-accent)]  p-2 rounded-full">
-                      <button onClick={() => setEditCar(true)}>
+                      <button onClick={() => {setCarVal(car); setEditCar(true)}}>
                         <FaPencilAlt />
                       </button>
                     </div>
@@ -50,28 +54,39 @@ export default function CarListing({ carList }) {
                 type="text"
                 placeholder="car model"
                 name="car"
+                value={carVal.car}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
+                
               />
               <input
                 type="text"
                 placeholder="year of manufacture"
                 name="year"
+                value={carVal.year}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <input
                 type="text"
                 placeholder="seat capacity"
                 name="seat"
+                value={carVal.seat}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <input
                 type="text"
                 placeholder="starting price per day"
                 name="price"
+                value={carVal.price}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
               />
               <select
                 name="fuel"
+                value={carVal.fuel}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="null">select fuel type</option>
@@ -80,6 +95,8 @@ export default function CarListing({ carList }) {
               </select>
               <select
                 name="transmission"
+                value={carVal.transmission}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="null">select transmission type</option>
@@ -88,6 +105,8 @@ export default function CarListing({ carList }) {
               </select>
               <select
                 name="aircon"
+                value={carVal.aircon}
+                onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 text-gray-500"
               >
                 <option value="">air conditioning available?</option>
@@ -100,13 +119,13 @@ export default function CarListing({ carList }) {
               <input
                 type="file"
                 onChange={(e) =>
-                  setCarForm({ ...carForm, image: e.target.files[0] })
+                  setCarVal({ ...carVal, image: e.target.files[0] })
                 }
-                className="bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 rounded text-gray-500"
+                className="bg-second font-normal text-base sm:text-xl md:text-2xl w-full p-3 rounded text-gray-500"
               />
-              <button className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full">
+              <button onClick={() => handleCarEdit(carVal)} className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full">
                 <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
-                  Add Car
+                  Edit Car
                 </p>
               </button>
             </div>

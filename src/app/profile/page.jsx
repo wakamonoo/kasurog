@@ -34,6 +34,17 @@ export default function Profile() {
   });
   const [carList, setCarList] = useState([]);
   const [addCar, setAddCar] = useState(false);
+  const [carVal, setCarVal] = useState({
+    car: "",
+    aircon: "",
+    fuel: "",
+    image: null,
+    price: "",
+    seat: "",
+    transmission: "",
+    year: "",
+  });
+  const [editCar, setEditCar] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (logged) => {
@@ -57,12 +68,25 @@ export default function Profile() {
       }
       if (logged) {
         try {
-          const res = await fetch(`${BASE_URL}/api/cars/carsList/${logged.uid}`);
+          const res = await fetch(
+            `${BASE_URL}/api/cars/carsList/${logged.uid}`
+          );
           const dbCars = await res.json();
 
           setCarList(dbCars);
+
+          setCarVal({
+            car: dbCars.car,
+            aircon: dbCars.aircon,
+            fuel: dbCars.fuel,
+            image: dbCars.image,
+            price: dbCars.price,
+            seat: dbCars.seat,
+            transmission: dbCars.transimission,
+            year: dbCars.year,
+          });
         } catch (err) {
-          console.error("failed to fetch carlist:", err)
+          console.error("failed to fetch carlist:", err);
         }
       }
       setLoading(false);
@@ -163,6 +187,77 @@ export default function Profile() {
         Swal.fire({
           title: "Error",
           text: data.error || "Updload Failed",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        title: "Error",
+        text: "Server Failed, try again later",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  };
+
+  const handleCarEdit = async () => {
+    try {
+      let imageURL = carVal.image;
+
+      if (carVal.image && carVal.image instanceof File) {
+        const formData = new FormData();
+        formData.append("file", carVal.image);
+
+        const uploadRes = await fetch(`${BASE_URL}/api/images/imageUpload`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const uploadData = await uploadRes.json();
+        if (!uploadRes.ok) {
+          throw new Error(uploadData.error || "image upload failed");
+        }
+
+        imageURL = uploadData.url;
+      }
+
+      const res = await fetch(`${BASE_URL}/api/cars/updateCar`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...carVal,
+          image: imageURL,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        Swal.fire({
+          title: "Success",
+          text: "Car Listing Added",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
+          window.location.reload();
+        });
+
+        setCarForm({
+          ...carVal,
+          image: imageURL,
+        });
+
+        setEditCar(false);
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: data.error || "Upload Failed",
           icon: "error",
           timer: 2000,
           showConfirmButton: false,
@@ -352,7 +447,15 @@ export default function Profile() {
           )}
           {showDriver && (
             <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
-              <CarListing carList={carList} />
+              <CarListing
+                carList={carList}
+                handleCarSubmit={handleCarSubmit}
+                carVal={carVal}
+                setCarVal={setCarVal}
+                handleCarEdit={handleCarEdit}
+                editCar={editCar}
+                setEditCar={setEditCar}
+              />
               <button
                 onClick={() => setAddCar(true)}
                 className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
@@ -505,7 +608,7 @@ export default function Profile() {
                 onChange={(e) =>
                   setCarForm({ ...carForm, image: e.target.files[0] })
                 }
-                className="bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3 rounded text-gray-500"
+                className="bg-second font-normal text-base sm:text-xl md:text-2xl w-full p-3 rounded text-gray-500"
               />
               <button
                 onClick={handleCarSubmit}
