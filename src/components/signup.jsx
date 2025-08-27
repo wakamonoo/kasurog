@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 
-import { MdClose, MdPersonAdd } from "react-icons/md";
+import { MdClose } from "react-icons/md";
 import Swal from "sweetalert2";
 import Logo from "@/assets/logo.png";
 import Image from "next/image";

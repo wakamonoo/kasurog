@@ -2,10 +2,10 @@
 import DriverApp from "@/components/driverprenuerApp";
 import { auth, googleSignUp } from "@/firebase/firebaseConfig";
 import { useState, useEffect, useRef } from "react";
-import { FaArrowLeft, FaUserAltSlash, FaCar } from "react-icons/fa";
+import { FaArrowLeft, FaUserAltSlash, FaCar, FaCarSide } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdDriveEta } from "react-icons/md";
 import Fallback from "@/assets/user.png";
 import CarListing from "@/components/carListing";
 
@@ -17,7 +17,7 @@ export default function Profile() {
   const [driverApp, setDriverApp] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showInfo, setShowInfo] = useState(true);
-  const [showDriver, setShowDiver] = useState(false);
+  const [showDriver, setShowDriver] = useState(false);
   const [edit, setEdit] = useState(false);
   const divRef = useRef();
   const ListRef = useRef();
@@ -45,6 +45,7 @@ export default function Profile() {
     year: "",
   });
   const [editCar, setEditCar] = useState(false);
+  const [showDriverPage, setShowDriverPage] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (logged) => {
@@ -60,6 +61,12 @@ export default function Profile() {
             contact: dbUser.contact || "",
             address: dbUser.address || "",
           });
+
+          if (dbUser && dbUser.role === "driver") {
+            setShowDriverPage(true);
+          } else {
+            setShowDriverPage(false);
+          }
         } catch (err) {
           console.error("failed to fetch user from db, error:", err);
         }
@@ -359,7 +366,7 @@ export default function Profile() {
           <div className="flex justify-center items-center gap-24 sm:gap-30 md:gap-36 mt-8">
             <button
               onClick={() => {
-                setShowDiver(false), setShowInfo(true);
+                setShowDriver(false), setShowInfo(true);
               }}
               className={`pb-2 cursor-pointer ${
                 showInfo
@@ -377,7 +384,7 @@ export default function Profile() {
             </button>
             <button
               onClick={() => {
-                setShowDiver(true), setShowInfo(false);
+                setShowDriver(true), setShowInfo(false);
               }}
               className={`pb-2 cursor-pointer ${
                 showDriver
@@ -445,32 +452,41 @@ export default function Profile() {
               </div>
             </div>
           )}
-          {showDriver && (
-            <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
-              <CarListing
-                carList={carList}
-                handleCarSubmit={handleCarSubmit}
-                carVal={carVal}
-                setCarVal={setCarVal}
-                handleCarEdit={handleCarEdit}
-                editCar={editCar}
-                setEditCar={setEditCar}
-              />
-              <button
-                onClick={() => setAddCar(true)}
-                className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
-              >
-                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl font-normal">
-                  list a car
+          {showDriver ? (
+            showDriverPage ? (
+              <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
+                <CarListing
+                  carList={carList}
+                  handleCarSubmit={handleCarSubmit}
+                  carVal={carVal}
+                  setCarVal={setCarVal}
+                  handleCarEdit={handleCarEdit}
+                  editCar={editCar}
+                  setEditCar={setEditCar}
+                />
+                <button
+                  onClick={() => setAddCar(true)}
+                  className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
+                >
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl font-normal">
+                    list a car
+                  </p>
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center mt-16 font-bold">
+                <FaCarSide className="text-7xl sm:text-8xl md:text-9xl" />
+                <p className="text-header text-base sm:text-xl md:text-2xl font-bold">
+                  driver access required
                 </p>
-              </button>
-            </div>
-          )}
+              </div>
+            )
+          ) : null}
         </div>
       ) : (
         <div className="flex flex-col gap-2 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <FaUserAltSlash className="text-7xl" />
-          <p className="text-header font-normal">kindly login first</p>
+          <FaUserAltSlash className="text-7xl sm:text-8xl md:text-9xl" />
+          <p className="text-header text-base sm:text-xl md:text-2xl font-bold">kindly login first</p>
         </div>
       )}
 
