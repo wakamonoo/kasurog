@@ -3,7 +3,7 @@ import { auth } from "@/firebase/firebaseConfig";
 import { googleSignUp } from "@/firebase/firebaseConfig";
 import { useEffect, useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { RiLogoutCircleRLine } from "react-icons/ri";
+import { RiAdminLine, RiLogoutCircleRLine } from "react-icons/ri";
 
 import { MdClose } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -18,6 +18,7 @@ const BASE_URL =
 export default function SignUp({ onClose }) {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const divRef = useRef();
+  const [adminBtn, setAdminBtn] = useState(false);
 
   useEffect(() => {
     function handleClick(e) {
@@ -35,6 +36,11 @@ export default function SignUp({ onClose }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((loggedIn) => {
       setIsLoggedIn(loggedIn);
+      if (loggedIn && loggedIn.email === "joven.serdanbataller21@gmail.com") {
+            setAdminBtn(true);
+          } else {
+            setAdminBtn(false);
+          }
     });
     return () => {
       unsubscribe();
@@ -104,7 +110,10 @@ export default function SignUp({ onClose }) {
       ref={divRef}
       className="flex relative justify-center bg-panel w-[350px] sm:w-[400px] md:w-[450px] h-[350px] sm:h-[400px] md:h-[450px] rounded-2xl overflow-hidden"
     >
-      <button onClick={onClose} className="absolute cursor-pointer top-4 right-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110">
+      <button
+        onClick={onClose}
+        className="absolute cursor-pointer top-4 right-4 text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110"
+      >
         <MdClose />
       </button>
       <div className="p-4 mt-4 flex flex-col justify-center items-center">
@@ -113,7 +122,9 @@ export default function SignUp({ onClose }) {
           <h4 className="text-normal text-2xl sm:text-3xl md:text-4xl font-heading font-extrabold leading-3 sm:leading-3.5 md:leading-4">
             vroom now!
           </h4>
-          <p className="text-sm sm:text-base md:text-xl text-label">your ride starts here!</p>
+          <p className="text-sm sm:text-base md:text-xl text-label">
+            your ride starts here!
+          </p>
         </div>
         <button
           onClick={handleSignIn}
@@ -122,15 +133,32 @@ export default function SignUp({ onClose }) {
           {isLoggedIn ? (
             <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
               <RiLogoutCircleRLine className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
-              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">log-out your account</p>
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                log-out your account
+              </p>
             </div>
           ) : (
             <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
               <FcGoogle />
-              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">sign in with google</p>
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                sign in with google
+              </p>
             </div>
           )}
         </button>
+
+        {adminBtn && (
+          <a href="/admin" className="w-full">
+            <button className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-4">
+              <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+                <RiAdminLine className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                  go to admin page
+                </p>
+              </div>
+            </button>
+          </a>
+        )}
       </div>
     </div>
   );
