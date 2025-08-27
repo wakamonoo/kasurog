@@ -14,7 +14,7 @@ router.post("/driverReg", async (req, res) => {
       .collection("registration")
       .updateOne(
         { uid },
-        { $setOnInsert: { uid, name, orcr, license } },
+        { $setOnInsert: { uid, name, orcr, license, submittedAt: new Date().toISOString().split("T")[0], } },
         { upsert: true }
       );
 
