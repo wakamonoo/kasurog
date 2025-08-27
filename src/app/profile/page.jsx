@@ -492,7 +492,7 @@ export default function Profile() {
 
       {driverApp && (
         <div className="fixed inset-0 backdrop-blur-xs z-[70] flex items-center justify-center">
-          <DriverApp onExit={() => setDriverApp(false)} />
+          <DriverApp onExit={() => setDriverApp(false)} user={user} />
         </div>
       )}
 
