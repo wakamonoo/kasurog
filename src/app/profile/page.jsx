@@ -240,7 +240,7 @@ export default function Profile() {
       if (res.ok) {
         Swal.fire({
           title: "Success",
-          text: "Car Listing Added",
+          text: "Car Listing Updated",
           icon: "success",
           timer: 2000,
           showConfirmButton: false,
