@@ -66,6 +66,7 @@ export default function DriverApp({ onExit, user }) {
           orcr: orcrURL,
           license: licenseURL,
           uid: user.uid,
+          name: user.name,
         }),
       });
 
@@ -101,7 +102,7 @@ export default function DriverApp({ onExit, user }) {
   const handleFileChange = (e) => {
     setRegForm((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
   };
-  
+
   return (
     <div
       ref={divRef}

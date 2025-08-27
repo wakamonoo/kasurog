@@ -4,17 +4,17 @@ import clientPromise from "../lib/mongodb.js";
 const router = express.Router();
 
 router.post("/driverReg", async (req, res) => {
-  const { uid, orcr, license } = req.body;
+  const { uid, name, orcr, license } = req.body;
   try {
 
     const client = await clientPromise;
     const db = client.db("arqila");
 
     await db
-      .collection("DriverReg")
+      .collection("registration")
       .updateOne(
         { uid },
-        { $setOnInsert: { uid, orcr, license } },
+        { $setOnInsert: { uid, name, orcr, license } },
         { upsert: true }
       );
 
