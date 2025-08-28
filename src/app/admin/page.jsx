@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
-import { MdClose } from "react-icons/md";
+import { FaArrowLeft, FaFile } from "react-icons/fa";
+import { FcApprove, FcEmptyTrash } from "react-icons/fc";
+import { MdApproval, MdClose, MdPending } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -23,7 +25,7 @@ export default function Admin() {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/api/users/driverReg`, {
+      const res1 = await fetch(`${BASE_URL}/api/users/driverReg`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -33,8 +35,19 @@ export default function Admin() {
         }),
       });
 
-      const data = await res.json();
-      if (res.ok) {
+      const res2 = await fetch(`${BASE_URL}/api/register/driverUp`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          uid: selectDrivers.uid,
+        }),
+      });
+
+      const data1 = await res1.json();
+      const data2 = await res2.json();
+      if (res1.ok && res2.ok) {
         Swal.fire({
           title: "Congrats",
           text: "You are now a DriverPreneur",
@@ -46,7 +59,7 @@ export default function Admin() {
       } else {
         Swal.fire({
           title: "Error",
-          text: data.error || "Process Failed",
+          text: data1.error || data2.error || "Process Failed",
           icon: "error",
           timer: 2000,
           showConfirmButton: false,
@@ -71,25 +84,86 @@ export default function Admin() {
           <FaArrowLeft className="absolute cursor-pointer left-[6vw] text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
         </a>
         <div className="flex justify-center items-center">
-          <h1>Konnichiwa, Wakamonoo!</h1>
+          <h1 className="text-base font-bold">Konnichiwa, Wakamonoo!</h1>
         </div>
         <div className="flex flex-col justify-center items-center mt-8">
           {driverPreneurs.length === 0 ? (
-            <div>no registrants</div>
+            <div className="flex flex-col justify-center gap-2 items-center p-8">
+              <FaFile className="text-7xl" />
+              <p className="text-xs font-normal">nothing to show yet</p>
+            </div>
           ) : (
             driverPreneurs.map((driverPren) => {
               return (
-                <button
-                  onClick={() => {
-                    setSelectDrivers(driverPren);
-                    setShowLegals(true);
-                  }}
-                  key={driverPren.uid}
-                  className="flex bg-highlight gap-6 rounded-full items-center cursor-pointer w-fill p-4 mt-8"
-                >
-                  <h4 className="text-base font-bold">{driverPren.name}</h4>
-                  <p className="text-xs text-label">{driverPren.submittedAt}</p>
-                </button>
+                <div>
+                  <div>
+                    <div className="flex justify-left items-center gap-1">
+                      <MdPending className="text-2xl" />
+                      <h4 className="text-base font-normal">
+                        Pending Requests:
+                      </h4>
+                    </div>
+                    {driverPreneurs.filter((d) => d.status === "pending")
+                      .length === 0 ? (
+                      <div className="flex flex-col justify-center gap-2 items-center p-8">
+                        <FaFile className="text-7xl" />
+                        <p className="text-xs font-normal">
+                          no pending requests
+                        </p>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSelectDrivers(driverPren);
+                          setShowLegals(true);
+                        }}
+                        key={driverPren.uid}
+                        className="flex bg-highlight gap-6 rounded-full items-center cursor-pointer w-fill p-4 mt-4"
+                      >
+                        <h4 className="text-base font-bold">
+                          {driverPren.name}
+                        </h4>
+                        <p className="text-xs text-label">
+                          {driverPren.submittedAt}
+                        </p>
+                      </button>
+                    )}
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-left gap-1 mt-8">
+                      <MdApproval className="text-2xl" />
+                      <h4 className="text-base font-normal">
+                        Approved Requests:
+                      </h4>
+                    </div>
+                    {driverPreneurs.filter((d) => d.status === "approved")
+                      .length === 0 ? (
+                      <div className="flex flex-col justify-center gap-2 items-center p-8">
+                        <FaFile className="text-7xl" />
+                        <p className="text-xs font-normal">
+                          no approved requests
+                        </p>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setSelectDrivers(driverPren);
+                          setShowLegals(true);
+                        }}
+                        key={driverPren.uid}
+                        className="flex bg-panel gap-6 rounded-full items-center cursor-pointer w-fill p-4 mt-4"
+                      >
+                        <h4 className="text-base font-bold">
+                          {driverPren.name}
+                        </h4>
+                        <p className="text-xs text-label">
+                          {driverPren.submittedAt}
+                        </p>
+                      </button>
+                    )}
+                  </div>
+                </div>
               );
             })
           )}

@@ -368,7 +368,7 @@ export default function Profile() {
             ) : (
               <button
                 onClick={() => setDriverApp(true)}
-                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-2"
+                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fill rounded-full mt-2"
               >
                 <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
                   <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
