@@ -84,30 +84,30 @@ export default function Admin() {
           <FaArrowLeft className="absolute cursor-pointer left-[6vw] text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
         </a>
         <div className="flex justify-center items-center">
-          <h1 className="text-base font-bold">Konnichiwa, Wakamonoo!</h1>
+          <h1 className="text-header text-xl sm:text-2xl md:text-3xl font-extrabold text-center uppercase px-12">Konnichiwa, Wakamonoo!</h1>
         </div>
         <div className="flex flex-col justify-center items-center mt-8">
           {driverPreneurs.length === 0 ? (
             <div className="flex flex-col justify-center gap-2 items-center p-8">
-              <FaFile className="text-7xl" />
-              <p className="text-xs font-normal">nothing to show yet</p>
+              <FaFile className="text-7xl sm:text-8xl md:text-9xl" />
+              <p className="text-xs sm:text-sm md:text-base font-normal">nothing to show yet</p>
             </div>
           ) : (
             driverPreneurs.map((driverPren) => {
               return (
-                <div>
+                <div key={driverPren.uid} className="grid grid-cols-1 mt-[4vh] md:grid-cols-2 gap-6 lg:gap-16 xl:gap-24 2xl:gap-32">
                   <div>
                     <div className="flex justify-left items-center gap-1">
-                      <MdPending className="text-2xl" />
-                      <h4 className="text-base font-normal">
+                      <MdPending className="text-2xl sm:text-3xl md:text-4xl" />
+                      <h4 className="text-base sm:text-xl md:text-2xl font-normal">
                         Pending Requests:
                       </h4>
                     </div>
                     {driverPreneurs.filter((d) => d.status === "pending")
                       .length === 0 ? (
                       <div className="flex flex-col justify-center gap-2 items-center p-8">
-                        <FaFile className="text-7xl" />
-                        <p className="text-xs font-normal">
+                        <FaFile className="text-7xl sm:text-8xl md:text-9xl" />
+                        <p className="text-xs sm:text-sm md:text-base font-normal">
                           no pending requests
                         </p>
                       </div>
@@ -117,13 +117,13 @@ export default function Admin() {
                           setSelectDrivers(driverPren);
                           setShowLegals(true);
                         }}
-                        key={driverPren.uid}
-                        className="flex bg-highlight gap-6 rounded-full items-center cursor-pointer w-fill p-4 mt-4"
+                        
+                        className="flex bg-highlight gap-6 rounded-full items-center cursor-pointer w-fill p-4 px-8 mt-4"
                       >
-                        <h4 className="text-base font-bold">
+                        <h4 className="text-base sm:text-xl md:text-2xl font-bold">
                           {driverPren.name}
                         </h4>
-                        <p className="text-xs text-label">
+                        <p className="text-xs sm:text-base md:texl-xl text-label">
                           {driverPren.submittedAt}
                         </p>
                       </button>
@@ -131,17 +131,17 @@ export default function Admin() {
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-left gap-1 mt-8">
-                      <MdApproval className="text-2xl" />
-                      <h4 className="text-base font-normal">
+                    <div className="flex items-center justify-left gap-1">
+                      <MdApproval className="text-2xl sm:text-3xl md:text-4xl" />
+                      <h4 className="text-base sm:text-xl md:text-2xl font-normal">
                         Approved Requests:
                       </h4>
                     </div>
                     {driverPreneurs.filter((d) => d.status === "approved")
                       .length === 0 ? (
                       <div className="flex flex-col justify-center gap-2 items-center p-8">
-                        <FaFile className="text-7xl" />
-                        <p className="text-xs font-normal">
+                        <FaFile className="text-7xl sm:text-8xl md:text-9xl" />
+                        <p className="text-xs sm:text-sm md:text-base font-normal">
                           no approved requests
                         </p>
                       </div>
@@ -151,13 +151,12 @@ export default function Admin() {
                           setSelectDrivers(driverPren);
                           setShowLegals(true);
                         }}
-                        key={driverPren.uid}
-                        className="flex bg-panel gap-6 rounded-full items-center cursor-pointer w-fill p-4 mt-4"
+                        className="flex bg-panel gap-6 rounded-full items-center cursor-pointer w-fill p-4 px-8 mt-4"
                       >
-                        <h4 className="text-base font-bold">
+                        <h4 className="text-base sm:text-xl md:text-2xl font-bold">
                           {driverPren.name}
                         </h4>
-                        <p className="text-xs text-label">
+                        <p className="text-xs sm:text-sm md:text-base text-label">
                           {driverPren.submittedAt}
                         </p>
                       </button>
