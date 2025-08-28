@@ -479,6 +479,7 @@ export default function Profile() {
                 </div>
                 <CarListing
                   carList={carList}
+                  setCarList={setCarList}
                   handleCarSubmit={handleCarSubmit}
                   carVal={carVal}
                   setCarVal={setCarVal}

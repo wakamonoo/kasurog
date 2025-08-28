@@ -1,16 +1,58 @@
 "use client";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import Swal from "sweetalert2";
 
-export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, editCar, setEditCar }) {
- 
-
+export default function CarListing({
+  carList,
+  setCarVal,
+  carVal,
+  handleCarEdit,
+  editCar,
+  setEditCar,
+  setCarList,
+}) {
   const handleCarEditChange = (e) => {
-  setCarVal((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-};
+    setCarVal((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  
+  const handleDelete = async (carid) => {
+    try {
+      const res = await fetch(`${BASE_URL}/api/cars/deleteCar/${carid}`, {
+        method: "DELETE",
+      });
 
+      const data = await res.json();
+      if (res.ok) {
+        setCarList((prev) => prev.filter((car) => car.carid !== carid));
+        Swal.fire({
+          title: "Success",
+          text: "Car Deleted",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } else {
+        Swal.fire({
+          title: "Failed",
+          text: data.error || "Car Deletion Faild",
+          icon: "error",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        title: "Error",
+        text: "Server Error",
+        icon: "error",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  };
   return (
     <div>
       <div className="flex flex-wrap justify-center gap-4 w-full px-4">
@@ -26,12 +68,21 @@ export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, 
                   </h2>
                   <div className="flex gap-2">
                     <div className="flex text-center items-center justify-center cursor-pointer text-xl sm:text-2xl md:text-3xl bg-highlight duration-200 hover:bg-[var(--color-accent)]  p-2 rounded-full">
-                      <button onClick={() => {setCarVal(car); setEditCar(true)}} className="cursor-pointer">
+                      <button
+                        onClick={() => {
+                          setCarVal(car);
+                          setEditCar(true);
+                        }}
+                        className="cursor-pointer"
+                      >
                         <FaPencilAlt />
                       </button>
                     </div>
                     <div className="flex text-center items-center justify-center cursor-pointer text-xl sm:text-2xl md:text-3xl bg-red-600 duration-200 hover:bg-red-700  p-2 rounded-full">
-                      <button className="cursor-pointer">
+                      <button
+                        onClick={() => handleDelete(car.carid)}
+                        className="cursor-pointer"
+                      >
                         <FaTrash />
                       </button>
                     </div>
@@ -57,7 +108,6 @@ export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, 
                 value={carVal.car}
                 onChange={handleCarEditChange}
                 className="rounded bg-second font-normal text-base sm:text-xl md:text-2xl w-ful p-3"
-                
               />
               <input
                 type="text"
@@ -123,7 +173,10 @@ export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, 
                 }
                 className="bg-second font-normal text-base sm:text-xl md:text-2xl w-full p-3 rounded text-gray-500"
               />
-              <button onClick={() => handleCarEdit(carVal)} className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full">
+              <button
+                onClick={() => handleCarEdit(carVal)}
+                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
+              >
                 <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-xl sm:text-2xl md:text-3xl">
                   Edit Car
                 </p>
