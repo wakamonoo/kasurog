@@ -53,4 +53,26 @@ router.put("/updateUser", async (req, res) => {
   }
 });
 
+router.put("/driverReg", async (req, res) => {
+  const { uid } = req.body;
+  try {
+    const client = await clientPromise;
+    const db = client.db("arqila");
+
+    const result = await db
+      .collection("users")
+      .updateOne(
+        { uid },
+        { $set: { role: "driver" } },
+        { upsert: true }
+      );
+
+    res.json(200).json({message: "success"});
+  } catch (err) {
+    console.error(err);
+    res.status(401).json({ error: "failed to update user" });
+  }
+});
+
+
 export default router;
