@@ -2,7 +2,13 @@
 import DriverApp from "@/components/driverprenuerApp";
 import { auth, googleSignUp } from "@/firebase/firebaseConfig";
 import { useState, useEffect, useRef } from "react";
-import { FaArrowLeft, FaUserAltSlash, FaCar, FaCarSide } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaUserAltSlash,
+  FaCar,
+  FaCarSide,
+  FaCrown,
+} from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
 import { MdClose, MdDriveEta } from "react-icons/md";
@@ -350,17 +356,28 @@ export default function Profile() {
             </p>
           </div>
           <div className="flex justify-center">
-            <button
-              onClick={() => setDriverApp(true)}
-              className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fill rounded-full mt-2"
-            >
-              <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
-                <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
-                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
-                  driverpreneur sign-up
-                </p>
+            {user.role === "driver" ? (
+              <div className="bg-highlight cursor-pointer p-4 w-fill rounded-full mt-2">
+                <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                    DriverPreneur
+                  </p>
+                  <FaCrown className="text-second" />
+                </div>
               </div>
-            </button>
+            ) : (
+              <button
+                onClick={() => setDriverApp(true)}
+                className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-2"
+              >
+                <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
+                  <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                    driverpreneur sign-up
+                  </p>
+                </div>
+              </button>
+            )}
           </div>
 
           <div className="flex justify-center items-center gap-24 sm:gap-30 md:gap-36 mt-8">
@@ -486,7 +503,9 @@ export default function Profile() {
       ) : (
         <div className="flex flex-col gap-2 justify-center items-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <FaUserAltSlash className="text-7xl sm:text-8xl md:text-9xl" />
-          <p className="text-header text-base sm:text-xl md:text-2xl font-bold">kindly login first</p>
+          <p className="text-header text-base sm:text-xl md:text-2xl font-bold">
+            kindly login first
+          </p>
         </div>
       )}
 
