@@ -102,53 +102,90 @@ export default function Hero() {
           )}
           {showPNav && (
             <div className="flex gap-4 cursor-pointer lg:gap-6 xl:gap-8 text-normal text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal">
-
               <div className="flex items-center justify-center group">
-                <a href="#cars" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                <a
+                  href="#cars"
+                  className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
+                >
                   <FaCar />
                 </a>
-                <a href="#cars" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
-                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">cars</span>
+                <a
+                  href="#cars"
+                  className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
+                >
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
+                    cars
+                  </span>
                 </a>
               </div>
 
               <div className="flex items-center justify-center group">
-                <a href="#about" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                <a
+                  href="#about"
+                  className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
+                >
                   <FaInfoCircle />
                 </a>
-                <a href="#about" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
-                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">about</span>
+                <a
+                  href="#about"
+                  className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
+                >
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
+                    about
+                  </span>
                 </a>
               </div>
 
               <div className="flex items-center justify-center group">
-                <a href="#contact" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                <a
+                  href="#contact"
+                  className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
+                >
                   <MdEmail />
                 </a>
-                <a href="#contact" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
-                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">contact</span>
+                <a
+                  href="#contact"
+                  className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
+                >
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
+                    contact
+                  </span>
                 </a>
               </div>
 
               <div className="flex items-center justify-center group">
-                <a onClick={() => setShowSignUp(true)} className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                <a
+                  onClick={() => setShowSignUp(true)}
+                  className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
+                >
                   <RiLoginBoxLine />
                 </a>
-                <a onClick={() => setShowSignUp((prev) => !prev)} className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
-                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">auth</span>
+                <a
+                  onClick={() => setShowSignUp((prev) => !prev)}
+                  className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
+                >
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
+                    auth
+                  </span>
                 </a>
               </div>
-
 
               <div className="flex items-center justify-center group">
-                <a href="/profile" className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]">
+                <a
+                  href="/profile"
+                  className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
+                >
                   <FaUserCircle />
                 </a>
-                <a href="/profile" className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none">
-                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">profile</span>
+                <a
+                  href="/profile"
+                  className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
+                >
+                  <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
+                    profile
+                  </span>
                 </a>
               </div>
-
             </div>
           )}
         </div>
@@ -175,10 +212,7 @@ export default function Hero() {
               <a href="#contact">
                 <p>contact</p>
               </a>
-              <a
-                onClick={() => setShowSignUp(true)}
-                className="flex"
-              >
+              <a onClick={() => setShowSignUp(true)} className="flex">
                 <p>auth</p>
               </a>
               <a href="/profile">
@@ -199,7 +233,9 @@ export default function Hero() {
               from daily rides to long-term needs, arqila makes renting simple
               and reliable
             </p>
-            <GetStarted />
+            <a href="#cars">
+              <GetStarted />
+            </a>
           </div>
         </div>
       </div>

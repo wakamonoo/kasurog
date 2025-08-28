@@ -131,16 +131,16 @@ export default function SignUp({ onClose }) {
           className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-12"
         >
           {isLoggedIn ? (
-            <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+            <div className="flex text-base sm:text-xl md:text-2xl items-center justify-center gap-2">
               <RiLogoutCircleRLine className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
-              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
-                log-out your account
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]  uppercase font-bold">
+                log-out account
               </p>
             </div>
           ) : (
-            <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+            <div className="flex text-base sm:text-xl md:text-2xll items-center justify-center gap-2">
               <FcGoogle />
-              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+              <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] uppercase font-bold">
                 sign in with google
               </p>
             </div>
@@ -150,9 +150,9 @@ export default function SignUp({ onClose }) {
         {adminBtn && (
           <a href="/admin" className="w-full">
             <button className="bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-full rounded-full mt-4">
-              <div className="flex text-xl sm:text-2xl md:text-3xl items-center justify-center gap-2">
+              <div className="flex text-base sm:text-xl md:text-2xl items-center justify-center gap-2">
                 <RiAdminLine className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
-                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] uppercase font-bold">
                   go to admin page
                 </p>
               </div>

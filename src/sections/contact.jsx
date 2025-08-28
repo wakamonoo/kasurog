@@ -81,7 +81,7 @@ export default function Contact() {
         />
         <button
           onClick={sendEmail}
-          className="p-2 duration-200 cursor-pointer hover:bg-[var(--color-secondary)] bg-highlight rounded text-second  hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl text-center font-normal"
+          className="p-2 duration-200 cursor-pointer hover:bg-[var(--color-secondary)] bg-highlight rounded text-second  hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl text-center uppercase font-bold"
         >
           send email
         </button>

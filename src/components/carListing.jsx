@@ -13,7 +13,7 @@ export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, 
 
   return (
     <div>
-      <div className="flex flex-col gap-4 w-full px-4">
+      <div className="flex flex-wrap justify-center gap-4 w-full px-4">
         {carList.length === 0 ? (
           <div>nothing</div>
         ) : (
@@ -21,17 +21,17 @@ export default function CarListing({ carList, setCarVal, carVal, handleCarEdit, 
             return (
               <div key={car.carid}>
                 <div className="flex justify-between items-center p-4 bg-second rounded w-full">
-                  <h2 className="font-heading text-normal truncate w-40 text-base sm:text-xl md:text-2xl">
+                  <h2 className="font-heading text-normal truncate w-40 sm:w-45 md:w-50 lg:w-55 text-base sm:text-xl md:text-2xl">
                     {car.car}
                   </h2>
                   <div className="flex gap-2">
-                    <div className="flex text-center items-center justify-center cursor-pointer text-xl bg-highlight duration-200 hover:bg-[var(--color-accent)]  p-2 rounded-full">
-                      <button onClick={() => {setCarVal(car); setEditCar(true)}}>
+                    <div className="flex text-center items-center justify-center cursor-pointer text-xl sm:text-2xl md:text-3xl bg-highlight duration-200 hover:bg-[var(--color-accent)]  p-2 rounded-full">
+                      <button onClick={() => {setCarVal(car); setEditCar(true)}} className="cursor-pointer">
                         <FaPencilAlt />
                       </button>
                     </div>
-                    <div className="flex text-center items-center justify-center cursor-pointer text-xl bg-red-600 duration-200 hover:bg-red-700  p-2 rounded-full">
-                      <button>
+                    <div className="flex text-center items-center justify-center cursor-pointer text-xl sm:text-2xl md:text-3xl bg-red-600 duration-200 hover:bg-red-700  p-2 rounded-full">
+                      <button className="cursor-pointer">
                         <FaTrash />
                       </button>
                     </div>

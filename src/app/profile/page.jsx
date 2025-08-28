@@ -8,6 +8,7 @@ import {
   FaCar,
   FaCarSide,
   FaCrown,
+  FaList,
 } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "@/components/loader";
@@ -359,7 +360,7 @@ export default function Profile() {
             {user.role === "driver" ? (
               <div className="bg-highlight cursor-pointer p-4 w-fill rounded-full mt-2">
                 <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] uppercase font-bold">
                     DriverPreneur
                   </p>
                   <FaCrown className="text-second" />
@@ -372,7 +373,7 @@ export default function Profile() {
               >
                 <div className="flex text-base sm:text-xl md:text-2xl font-normal items-center justify-center gap-2">
                   <FaCar className="text-second duration-200 group-hover:text-[var(--color-highlight)]" />
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)]">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] uppercase font-bold">
                     driverpreneur sign-up
                   </p>
                 </div>
@@ -462,7 +463,7 @@ export default function Profile() {
                   onClick={() => setEdit(true)}
                   className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
                 >
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] ttext-base sm:text-xl md:text-2xl font-normal">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] ttext-base sm:text-xl md:text-2xl uppercase font-bold">
                     edit information
                   </p>
                 </button>
@@ -472,6 +473,10 @@ export default function Profile() {
           {showDriver ? (
             showDriverPage ? (
               <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
+                <div className="flex items-center gap-1 p-4 text-header">
+                  <FaList className="text-2xl sm:text-3xl md:text-4xl" />
+                  <h4 className="text-base sm:text-xl md:text-2xl font-normal">Your Car Listing:</h4>
+                </div>
                 <CarListing
                   carList={carList}
                   handleCarSubmit={handleCarSubmit}
@@ -485,7 +490,7 @@ export default function Profile() {
                   onClick={() => setAddCar(true)}
                   className="mt-4 bg-highlight group duration-200 cursor-pointer hover:bg-[var(--color-secondary)] p-4 w-fit rounded-full"
                 >
-                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl font-normal">
+                  <p className="text-second duration-200 group-hover:text-[var(--color-highlight)] text-base sm:text-xl md:text-2xl uppercase font-bold">
                     list a car
                   </p>
                 </button>
