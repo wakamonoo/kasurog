@@ -84,18 +84,25 @@ export default function Admin() {
           <FaArrowLeft className="absolute cursor-pointer left-[6vw] text-2xl sm:text-3xl md:text-4xl font-bold duration-200 hover:scale-110 active:scale-110" />
         </a>
         <div className="flex justify-center items-center">
-          <h1 className="text-header text-xl sm:text-2xl md:text-3xl font-extrabold text-center uppercase px-12">Konnichiwa, Wakamonoo!</h1>
+          <h1 className="text-header text-xl sm:text-2xl md:text-3xl font-extrabold text-center uppercase px-12">
+            Konnichiwa, Wakamonoo!
+          </h1>
         </div>
         <div className="flex flex-col justify-center items-center mt-8">
           {driverPreneurs.length === 0 ? (
             <div className="flex flex-col justify-center gap-2 items-center p-8">
               <FaFile className="text-7xl sm:text-8xl md:text-9xl" />
-              <p className="text-xs sm:text-sm md:text-base font-normal">nothing to show yet</p>
+              <p className="text-xs sm:text-sm md:text-base font-normal">
+                nothing to show yet
+              </p>
             </div>
           ) : (
             driverPreneurs.map((driverPren) => {
               return (
-                <div key={driverPren.uid} className="grid grid-cols-1 mt-[4vh] md:grid-cols-2 gap-6 lg:gap-16 xl:gap-24 2xl:gap-32">
+                <div
+                  key={driverPren.uid}
+                  className="grid grid-cols-1 mt-[4vh] md:grid-cols-2 gap-6 lg:gap-16 xl:gap-24 2xl:gap-32"
+                >
                   <div>
                     <div className="flex justify-left items-center gap-1">
                       <MdPending className="text-2xl sm:text-3xl md:text-4xl" />
@@ -117,7 +124,6 @@ export default function Admin() {
                           setSelectDrivers(driverPren);
                           setShowLegals(true);
                         }}
-                        
                         className="flex bg-highlight gap-6 rounded-full items-center cursor-pointer w-fill p-4 px-8 mt-4"
                       >
                         <h4 className="text-base sm:text-xl md:text-2xl font-bold">

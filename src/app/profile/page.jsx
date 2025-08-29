@@ -475,7 +475,9 @@ export default function Profile() {
               <div className="flex flex-col justify-center items-center mt-2 gap-2 p-4">
                 <div className="flex items-center gap-1 p-4 text-header">
                   <FaList className="text-2xl sm:text-3xl md:text-4xl" />
-                  <h4 className="text-base sm:text-xl md:text-2xl font-normal">Your Car Listing:</h4>
+                  <h4 className="text-base sm:text-xl md:text-2xl font-normal">
+                    Your Car Listing:
+                  </h4>
                 </div>
                 <CarListing
                   carList={carList}
