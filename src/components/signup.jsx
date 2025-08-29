@@ -37,10 +37,10 @@ export default function SignUp({ onClose }) {
     const unsubscribe = auth.onAuthStateChanged((loggedIn) => {
       setIsLoggedIn(loggedIn);
       if (loggedIn && loggedIn.email === "joven.serdanbataller21@gmail.com") {
-            setAdminBtn(true);
-          } else {
-            setAdminBtn(false);
-          }
+        setAdminBtn(true);
+      } else {
+        setAdminBtn(false);
+      }
     });
     return () => {
       unsubscribe();
