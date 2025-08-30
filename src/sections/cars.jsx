@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { FaBoxOpen, FaGasPump } from "react-icons/fa";
 import { GiGearStickPattern } from "react-icons/gi";
 import { MdAcUnit } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
@@ -13,6 +14,8 @@ const BASE_URL =
 
 export default function Cars() {
   const [carInfo, setCarInfo] = useState([]);
+  const router = useRouter();
+
   useEffect(() => {
     const getCarinfo = async () => {
       const res = await fetch(`${BASE_URL}/api/cars/carsDisplay`);
@@ -49,8 +52,9 @@ export default function Cars() {
           carInfo.map((car) => {
             return (
               <div
+                onClick={() => router.push(`/carPage/${car.carid}`)}
                 key={car.carid}
-                className="flex flex-col overflow-hidden shadow-2xl rounded bg-panel relative w-[300px] h-auto"
+                className="flex flex-col overflow-hidden shadow-2xl rounded bg-panel relative w-[300px] h-auto cursor-pointer duration-200 hover:-translate-y-5 hover:shadow-sky-500 active:-translate-y-5 active:shadow-sky-500"
               >
                 <div>
                   <Image
@@ -63,7 +67,7 @@ export default function Cars() {
                   />
                 </div>
                 <div className="py-4">
-                  <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase line-clamp-2 h-[64px]">
+                  <h2 className="text-normal text-center font-heading text-base sm:text-xl md:text-2xl font-semibold uppercase line-clamp-2 md:h-[64px]">
                     {car.car}
                   </h2>
                   <div className="flex justify-center items-center gap-0.5 p-4">

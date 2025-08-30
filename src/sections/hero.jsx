@@ -166,7 +166,7 @@ export default function Hero() {
                   className="absolute flex items-center justify-center mt-20 opacity-0 duration-200 group-hover:opacity-100 px-4 rounded-full pointer-events-none"
                 >
                   <span className="md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-highlight">
-                    auth
+                    ignition
                   </span>
                 </a>
               </div>
@@ -214,7 +214,7 @@ export default function Hero() {
                 <p>contact</p>
               </a>
               <a onClick={() => setShowSignUp(true)} className="flex">
-                <p>auth</p>
+                <p>ignition</p>
               </a>
               <a href="/profile">
                 <p>profile</p>
