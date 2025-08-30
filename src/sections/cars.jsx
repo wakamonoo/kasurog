@@ -6,7 +6,10 @@ import { FaBoxOpen, FaGasPump } from "react-icons/fa";
 import { GiGearStickPattern } from "react-icons/gi";
 import { MdAcUnit } from "react-icons/md";
 
-const BASE_URL = process.env.NODE_ENV === "production" ? "https://arqila.onrender.com" : "http://localhost:4000";
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://arqila.onrender.com"
+    : "http://localhost:4000";
 
 export default function Cars() {
   const [carInfo, setCarInfo] = useState([]);
@@ -80,7 +83,9 @@ export default function Cars() {
                   <div className="flex gap-2 py-2 justify-center">
                     <div className="flex justify-center items-center gap-1 text-xs sm:text-sm md:text-base">
                       <FaGasPump />
-                      <p className="uppercase text-xs sm:text-sm md:text-base text-label">{car.fuel}</p>
+                      <p className="uppercase text-xs sm:text-sm md:text-base text-label">
+                        {car.fuel}
+                      </p>
                     </div>
                     <div className="flex justify-center items-center gap-1 text-xs sm:text-sm md:text-base">
                       <GiGearStickPattern />

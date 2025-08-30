@@ -5,6 +5,7 @@ import {
   FaCar,
   FaInfoCircle,
   FaUserCircle,
+  FaSignInAlt,
 } from "react-icons/fa";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
@@ -158,7 +159,7 @@ export default function Hero() {
                   onClick={() => setShowSignUp(true)}
                   className="relative flex items-center justify-center duration-200 group-hover:-translate-y-2 group-hover:scale-120 group-hover:text-[var(--color-highlight)]"
                 >
-                  <RiLoginBoxLine />
+                  <FaSignInAlt />
                 </a>
                 <a
                   onClick={() => setShowSignUp((prev) => !prev)}
